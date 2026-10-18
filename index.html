@@ -1,41 +1,1070 @@
-             🎄
+<!DOCTYPE html>
+<html lang="en">
 
-       THE MISSING
-      CHRISTMAS STAMP
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   Five challenges stand
-   between you and the stamp.
+    <title>The Christmas Mystery</title>
+
+    <style>
+
+        /* -----------------------------
+           GENERAL
+        ----------------------------- */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    160deg,
+                    #071d18,
+                    #0f392e
+                );
+
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+
+            margin: auto;
+
+            padding:
+                40px 0
+                70px 0;
+        }
 
 
-YOUR PROGRESS              0 / 5
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        /* -----------------------------
+           INTRO
+        ----------------------------- */
+
+        .hero {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+        .small-title {
+            color: #d8b75f;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 20px;
+        }
+
+        .christmas-icon {
+            font-size: 60px;
+
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+
+            font-size: 40px;
+
+            line-height: 1.1;
+
+            margin:
+                0 0
+                20px 0;
+        }
+
+        h1 span {
+            color: #d8b75f;
+        }
+
+        .intro {
+            color: #b7c5bf;
+
+            line-height: 1.6;
+
+            max-width: 500px;
+
+            margin: auto;
+        }
 
 
-🔤   RIDDLE 01
-     Christmas Word
-     Crack the hidden word.       →
+        /* -----------------------------
+           PROGRESS
+        ----------------------------- */
+
+        .progress-section {
+            margin-bottom: 30px;
+        }
+
+        .progress-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            font-size: 12px;
+
+            color: #b7c5bf;
+        }
+
+        .progress-bar {
+            width: 100%;
+
+            height: 8px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #c2943b,
+                    #f1d077
+                );
+
+            border-radius: 20px;
+
+            transition:
+                width 0.5s ease;
+        }
 
 
-🧩   RIDDLE 02
-     The Crossword
-     Complete the crossword.      →
+        /* -----------------------------
+           RIDDLE CARDS
+        ----------------------------- */
+
+        .riddles {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .riddle {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            position: relative;
+
+            padding: 20px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius: 15px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .riddle:hover {
+            transform:
+                translateY(-2px);
+
+            border-color:
+                #d8b75f;
+        }
+
+        .riddle-icon {
+            font-size: 32px;
+
+            width: 45px;
+
+            text-align: center;
+        }
+
+        .riddle-info {
+            flex: 1;
+        }
+
+        .riddle-number {
+            color: #d8b75f;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 5px;
+        }
+
+        .riddle h2 {
+            margin:
+                0 0
+                5px 0;
+
+            font-family: Georgia, serif;
+
+            font-size: 18px;
+        }
+
+        .riddle p {
+            margin: 0;
+
+            color: #9eada7;
+
+            font-size: 13px;
+        }
+
+        .riddle-status {
+            font-size: 20px;
+
+            color: #d8b75f;
+        }
 
 
-🧠   RIDDLE 03
-     Christmas Logic
-     Work out what happened.      →
+        /* -----------------------------
+           SOLVED RIDDLE
+        ----------------------------- */
+
+        .riddle.solved {
+            background:
+                rgba(
+                    63,
+                    153,
+                    85,
+                    0.12
+                );
+
+            border-color:
+                #498f59;
+        }
+
+        .riddle.solved
+        .riddle-status {
+            color: #70d887;
+        }
 
 
-👀   RIDDLE 04
-     The Hidden Message           →
+        /* -----------------------------
+           FINAL VAULT
+        ----------------------------- */
+
+        .vault {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-top: 30px;
+
+            padding: 24px;
+
+            border:
+                1px dashed
+                #806d3d;
+
+            border-radius: 15px;
+
+            opacity: 0.5;
+
+            transition: 0.3s;
+        }
+
+        .vault-icon {
+            font-size: 38px;
+        }
+
+        .vault h2 {
+            margin:
+                0 0
+                5px 0;
+
+            font-family: Georgia, serif;
+        }
+
+        .vault p {
+            margin: 0;
+
+            font-size: 13px;
+
+            color: #a7b4af;
+        }
+
+        .vault.unlocked {
+            opacity: 1;
+
+            border-color:
+                #d8b75f;
+
+            background:
+                rgba(
+                    216,
+                    183,
+                    95,
+                    0.08
+                );
+        }
 
 
-🎁   RIDDLE 05
-     The Final Evidence           →
+        /* -----------------------------
+           POP-UP RIDDLE WINDOW
+        ----------------------------- */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.85
+                );
+
+            padding: 20px;
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 100;
+        }
+
+        .modal.visible {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 450px;
+
+            padding: 35px 25px;
+
+            background:
+                #102c24;
+
+            border:
+                1px solid
+                #796b43;
+
+            border-radius: 18px;
+
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 55px;
+        }
+
+        .modal-content h2 {
+            font-family: Georgia, serif;
+
+            font-size: 28px;
+        }
+
+        .modal-content p {
+            color: #b6c2bd;
+
+            line-height: 1.5;
+        }
 
 
-🔐   FINAL CHALLENGE
-     The Secret Location
+        /* -----------------------------
+           BUTTONS
+        ----------------------------- */
 
-     Complete all five riddles
-     to unlock the final clue.
+        button {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+        .solve-button {
+            background:
+                #d3ad55;
+
+            color:
+                #10251f;
+        }
+
+        .back-button {
+            background:
+                transparent;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            color: white;
+        }
+
+
+        /* -----------------------------
+           MOBILE
+        ----------------------------- */
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding-top: 30px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- INTRO -->
+
+    <section class="hero">
+
+        <div class="small-title">
+            CHRISTMAS PARTY 2026
+        </div>
+
+        <div class="christmas-icon">
+            🎄
+        </div>
+
+        <h1>
+            The Missing
+            <br>
+            <span>Christmas Stamp</span>
+        </h1>
+
+        <p class="intro">
+
+            The secret Christmas Stamp has disappeared.
+
+            <br><br>
+
+            Five challenges stand between you
+            and its hiding place.
+
+            Solve them all to unlock the final clue.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- PROGRESS -->
+
+    <section class="progress-section">
+
+        <div class="progress-top">
+
+            <span>
+                YOUR PROGRESS
+            </span>
+
+            <span id="progressText">
+                0 / 5 SOLVED
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- RIDDLES -->
+
+    <section class="riddles">
+
+
+        <div
+            class="riddle"
+            id="riddle1"
+            onclick="openRiddle(1)">
+
+            <div class="riddle-icon">
+                🔤
+            </div>
+
+            <div class="riddle-info">
+
+                <div class="riddle-number">
+                    RIDDLE 01
+                </div>
+
+                <h2>
+                    Christmas Word
+                </h2>
+
+                <p>
+                    Crack the hidden word.
+                </p>
+
+            </div>
+
+            <div class="riddle-status">
+                →
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="riddle"
+            id="riddle2"
+            onclick="openRiddle(2)">
+
+            <div class="riddle-icon">
+                🧩
+            </div>
+
+            <div class="riddle-info">
+
+                <div class="riddle-number">
+                    RIDDLE 02
+                </div>
+
+                <h2>
+                    The Crossword
+                </h2>
+
+                <p>
+                    Complete the Christmas crossword.
+                </p>
+
+            </div>
+
+            <div class="riddle-status">
+                →
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="riddle"
+            id="riddle3"
+            onclick="openRiddle(3)">
+
+            <div class="riddle-icon">
+                🧠
+            </div>
+
+            <div class="riddle-info">
+
+                <div class="riddle-number">
+                    RIDDLE 03
+                </div>
+
+                <h2>
+                    Christmas Logic
+                </h2>
+
+                <p>
+                    Can you work out what happened?
+                </p>
+
+            </div>
+
+            <div class="riddle-status">
+                →
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="riddle"
+            id="riddle4"
+            onclick="openRiddle(4)">
+
+            <div class="riddle-icon">
+                👀
+            </div>
+
+            <div class="riddle-info">
+
+                <div class="riddle-number">
+                    RIDDLE 04
+                </div>
+
+                <h2>
+                    The Hidden Message
+                </h2>
+
+                <p>
+                    Not everything is as it seems.
+                </p>
+
+            </div>
+
+            <div class="riddle-status">
+                →
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="riddle"
+            id="riddle5"
+            onclick="openRiddle(5)">
+
+            <div class="riddle-icon">
+                🎁
+            </div>
+
+            <div class="riddle-info">
+
+                <div class="riddle-number">
+                    RIDDLE 05
+                </div>
+
+                <h2>
+                    The Final Evidence
+                </h2>
+
+                <p>
+                    Recover the last piece of the code.
+                </p>
+
+            </div>
+
+            <div class="riddle-status">
+                →
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FINAL VAULT -->
+
+    <section
+        class="vault"
+        id="vault">
+
+        <div
+            class="vault-icon"
+            id="vaultIcon">
+
+            🔐
+
+        </div>
+
+        <div>
+
+            <div class="riddle-number">
+                FINAL CHALLENGE
+            </div>
+
+            <h2>
+                The Secret Location
+            </h2>
+
+            <p id="vaultText">
+
+                Complete all five riddles
+                to unlock the final clue.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+
+<!-- RIDDLE POPUP -->
+
+<div
+    class="modal"
+    id="riddleModal">
+
+    <div class="modal-content">
+
+        <div
+            class="modal-icon"
+            id="modalIcon">
+
+            🧩
+
+        </div>
+
+        <div
+            class="riddle-number"
+            id="modalNumber">
+
+            RIDDLE 01
+
+        </div>
+
+        <h2 id="modalTitle">
+            Riddle
+        </h2>
+
+        <p id="modalDescription">
+
+            Your riddle will eventually
+            appear here.
+
+        </p>
+
+
+        <button
+            class="solve-button"
+            onclick="solveRiddle()">
+
+            ✓ TEMPORARILY MARK AS SOLVED
+
+        </button>
+
+
+        <button
+            class="back-button"
+            onclick="closeRiddle()">
+
+            ← BACK
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* -----------------------------
+       RIDDLE INFORMATION
+    ----------------------------- */
+
+    const riddles = {
+
+        1: {
+            icon: "🔤",
+            title: "Christmas Word",
+            description:
+                "This will become our Wordle-style challenge."
+        },
+
+        2: {
+            icon: "🧩",
+            title: "The Crossword",
+            description:
+                "This will become our Christmas crossword."
+        },
+
+        3: {
+            icon: "🧠",
+            title: "Christmas Logic",
+            description:
+                "This will become our logic challenge."
+        },
+
+        4: {
+            icon: "👀",
+            title: "The Hidden Message",
+            description:
+                "This will become a visual or hidden-message challenge."
+        },
+
+        5: {
+            icon: "🎁",
+            title: "The Final Evidence",
+            description:
+                "This challenge will reveal the final piece of the code."
+        }
+
+    };
+
+
+    let currentRiddle = null;
+
+
+
+    /* -----------------------------
+       OPEN RIDDLE
+    ----------------------------- */
+
+    function openRiddle(number) {
+
+        currentRiddle = number;
+
+        const riddle =
+            riddles[number];
+
+
+        document
+            .getElementById("modalIcon")
+            .innerText =
+            riddle.icon;
+
+
+        document
+            .getElementById("modalNumber")
+            .innerText =
+            "RIDDLE 0" + number;
+
+
+        document
+            .getElementById("modalTitle")
+            .innerText =
+            riddle.title;
+
+
+        document
+            .getElementById("modalDescription")
+            .innerText =
+            riddle.description;
+
+
+        document
+            .getElementById("riddleModal")
+            .classList
+            .add("visible");
+
+    }
+
+
+
+    /* -----------------------------
+       CLOSE RIDDLE
+    ----------------------------- */
+
+    function closeRiddle() {
+
+        document
+            .getElementById("riddleModal")
+            .classList
+            .remove("visible");
+
+    }
+
+
+
+    /* -----------------------------
+       SOLVE RIDDLE
+    ----------------------------- */
+
+    function solveRiddle() {
+
+        if (currentRiddle === null) {
+            return;
+        }
+
+
+        localStorage.setItem(
+            "riddle" + currentRiddle,
+            "solved"
+        );
+
+
+        closeRiddle();
+
+        updateProgress();
+
+    }
+
+
+
+    /* -----------------------------
+       UPDATE PROGRESS
+    ----------------------------- */
+
+    function updateProgress() {
+
+        let solved = 0;
+
+
+        for (
+            let number = 1;
+            number <= 5;
+            number++
+        ) {
+
+            const status =
+                localStorage.getItem(
+                    "riddle" + number
+                );
+
+
+            const card =
+                document.getElementById(
+                    "riddle" + number
+                );
+
+
+            if (status === "solved") {
+
+                solved++;
+
+
+                card.classList
+                    .add("solved");
+
+
+                card
+                    .querySelector(
+                        ".riddle-status"
+                    )
+                    .innerText =
+                    "✓";
+
+            }
+
+        }
+
+
+        /* Update text */
+
+        document
+            .getElementById("progressText")
+            .innerText =
+            solved +
+            " / 5 SOLVED";
+
+
+        /* Update bar */
+
+        const percentage =
+            solved / 5 * 100;
+
+
+        document
+            .getElementById("progressFill")
+            .style.width =
+            percentage + "%";
+
+
+        /* Unlock final clue */
+
+        if (solved === 5) {
+
+            document
+                .getElementById("vault")
+                .classList
+                .add("unlocked");
+
+
+            document
+                .getElementById("vaultIcon")
+                .innerText =
+                "🔓";
+
+
+            document
+                .getElementById("vaultText")
+                .innerText =
+                "All riddles solved. The final challenge is unlocked!";
+
+        }
+
+    }
+
+
+
+    /* Run when page loads */
+
+    updateProgress();
+
+
+</script>
+
+
+</body>
+
+</html>
