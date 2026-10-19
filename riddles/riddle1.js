@@ -22,7 +22,13 @@ const SOLUTION_WORDS = [
     "LIGHT",
     "MERRY",
     "SANTA",
-    "SNOWY"
+    "SNOWY",
+    "TREES",
+    "CANDY",
+    "CAROL",
+    "JESUS",
+    "JOLLY",
+    "CHEER"
 ];
 
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Riddle 2 - Christmas Crossword</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+</head>
+
+<body>
+
+<main class="container crossword-page">
+
+    <a
+        class="back-link"
+        href="../index.html"
+    >
+        ← Back to riddles
+    </a>
+
+
+    <header class="crossword-header">
+
+        <div class="small-title">
+            RIDDLE 02
+        </div>
+
+        <div class="crossword-title-icon">
+            🧩
+        </div>
+
+        <h1>
+            Christmas
+            <span>Crossword</span>
+        </h1>
+
+        <p class="crossword-introduction">
+            Solve all eight clues to complete the crossword.
+        </p>
+
+    </header>
+
+
+    <!-- CURRENT CLUE -->
+
+    <div
+        class="active-clue-box"
+        id="activeClueBox"
+    >
+        Tap a clue or square to begin.
+    </div>
+
+
+    <!-- CROSSWORD -->
+
+    <div class="crossword-grid-wrapper">
+
+        <div
+            class="crossword-grid"
+            id="crosswordGrid"
+        ></div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        class="crossword-message"
+        id="crosswordMessage"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- CLUES -->
+
+    <section class="crossword-clues">
+
+        <div class="clue-section">
+
+            <h2>Across</h2>
+
+            <div id="acrossClues"></div>
+
+        </div>
+
+
+        <div class="clue-section">
+
+            <h2>Down</h2>
+
+            <div id="downClues"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CHECK -->
+
+    <button
+        class="crossword-check-button"
+        id="checkCrossword"
+        type="button"
+    >
+        Check crossword
+    </button>
+
+
+    <!-- SUCCESS -->
+
+    <section
+        class="crossword-result"
+        id="crosswordResult"
+        hidden
+    >
+
+        <div class="crossword-result-icon">
+            🎄
+        </div>
+
+        <h2>Crossword solved!</h2>
+
+        <p>
+            You cracked Riddle 2.
+        </p>
+
+        <a
+            class="wordle-return-button"
+            href="../index.html"
+        >
+            Return to the riddles
+        </a>
+
+    </section>
+
+
+    <!-- ONLY FOR TESTING -->
+
+    <button
+        class="wordle-reset-button"
+        id="resetCrossword"
+        type="button"
+    >
+        Reset Riddle 2
+    </button>
+
+</main>
+
+
+<script src="riddle2.js"></script>
+
+</body>
+
+</html>
