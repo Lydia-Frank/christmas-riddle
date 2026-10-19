@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Riddle 3 - The Nisse Labyrinth</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+</head>
+
+<body>
+
+<main class="container maze-page">
+
+    <a
+        class="back-link"
+        href="../index.html"
+    >
+        ← Back to riddles
+    </a>
+
+
+    <header class="maze-header">
+
+        <div class="small-title">
+            RIDDLE 03
+        </div>
+
+        <div class="maze-title-icon">
+            🧝
+        </div>
+
+        <h1>
+            The Nisse
+            <span>Labyrinth</span>
+        </h1>
+
+        <p class="maze-introduction">
+            The nisse is lost somewhere in the Christmas labyrinth.
+            Find the route to Santa without walking through the walls.
+        </p>
+
+    </header>
+
+
+    <!-- GAME INFORMATION -->
+
+    <section class="maze-status">
+
+        <div class="maze-status-item">
+
+            <span class="maze-status-label">
+                MOVES
+            </span>
+
+            <strong id="moveCounter">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="maze-status-divider"></div>
+
+
+        <div class="maze-status-item">
+
+            <span class="maze-status-label">
+                DESTINATION
+            </span>
+
+            <strong>
+                🎅
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        class="maze-message"
+        id="mazeMessage"
+        aria-live="polite"
+    >
+        Help 🧝 reach 🎅
+    </div>
+
+
+    <!-- MAZE -->
+
+    <section class="maze-frame">
+
+        <canvas
+            id="mazeCanvas"
+            aria-label="A Christmas maze. Move the nisse to Santa."
+        ></canvas>
+
+    </section>
+
+
+    <!-- CONTROLS -->
+
+    <section class="maze-controls">
+
+        <button
+            class="maze-control maze-up"
+            type="button"
+            data-direction="up"
+            aria-label="Move up"
+        >
+            ▲
+        </button>
+
+
+        <button
+            class="maze-control maze-left"
+            type="button"
+            data-direction="left"
+            aria-label="Move left"
+        >
+            ◀
+        </button>
+
+
+        <button
+            class="maze-control maze-down"
+            type="button"
+            data-direction="down"
+            aria-label="Move down"
+        >
+            ▼
+        </button>
+
+
+        <button
+            class="maze-control maze-right"
+            type="button"
+            data-direction="right"
+            aria-label="Move right"
+        >
+            ▶
+        </button>
+
+    </section>
+
+
+    <p class="maze-control-help">
+        Use the buttons, swipe on the maze, or use your keyboard arrows.
+    </p>
+
+
+    <!-- SUCCESS -->
+
+    <section
+        class="maze-result"
+        id="mazeResult"
+        hidden
+    >
+
+        <div class="maze-result-icon">
+            🎅🎄🧝
+        </div>
+
+        <h2>
+            Santa found!
+        </h2>
+
+        <p id="mazeResultText">
+            The nisse has escaped the labyrinth.
+        </p>
+
+        <a
+            class="wordle-return-button"
+            href="../index.html"
+        >
+            Return to the riddles
+        </a>
+
+    </section>
+
+
+    <!-- DEVELOPMENT RESET -->
+
+    <button
+        class="wordle-reset-button"
+        id="resetMaze"
+        type="button"
+    >
+        Reset Riddle 3 and generate a new maze
+    </button>
+
+</main>
+
+
+<script src="riddle3.js"></script>
+
+</body>
+
+</html>

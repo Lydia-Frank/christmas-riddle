@@ -1400,3 +1400,388 @@
     }
 
 }
+
+/* =================================
+   RIDDLE 3: NISSE LABYRINTH
+================================= */
+
+.maze-page {
+    max-width: 760px;
+}
+
+
+/* HEADER */
+
+.maze-header {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.maze-title-icon {
+    margin-bottom: 8px;
+
+    font-size: 50px;
+}
+
+.maze-header h1 {
+    margin: 0;
+}
+
+.maze-introduction {
+    max-width: 520px;
+
+    margin:
+        16px auto
+        0;
+
+    color: #b7c5bf;
+
+    line-height: 1.55;
+}
+
+
+/* STATUS */
+
+.maze-status {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 28px;
+
+    max-width: 360px;
+
+    margin:
+        0 auto
+        15px;
+
+    padding:
+        12px 20px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+    border-radius: 12px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.04
+        );
+}
+
+.maze-status-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.maze-status-item strong {
+    color: #f1d077;
+
+    font-size: 21px;
+}
+
+.maze-status-label {
+    color: #8fa099;
+
+    font-size: 9px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.maze-status-divider {
+    width: 1px;
+    height: 32px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+}
+
+
+/* MESSAGE */
+
+.maze-message {
+    min-height: 26px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    color: #f1d077;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* MAZE */
+
+.maze-frame {
+    width: 100%;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 6px;
+
+    border:
+        2px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.7
+        );
+
+    border-radius: 12px;
+
+    background: #f8f4e9;
+
+    box-shadow:
+        0 15px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.3
+        );
+
+    overflow: hidden;
+}
+
+#mazeCanvas {
+    display: block;
+
+    width: 100%;
+
+    border-radius: 6px;
+
+    touch-action: none;
+}
+
+
+/* WALL COLLISION */
+
+.maze-blocked {
+    animation:
+        maze-blocked
+        0.2s;
+}
+
+@keyframes maze-blocked {
+
+    0%,
+    100% {
+        filter: none;
+    }
+
+    50% {
+        filter:
+            sepia(1)
+            saturate(4)
+            hue-rotate(315deg);
+    }
+
+}
+
+
+/* CONTROLS */
+
+.maze-controls {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 58px);
+
+    grid-template-rows:
+        repeat(2, 58px);
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 24px;
+}
+
+.maze-control {
+    width: 58px;
+    height: 58px;
+
+    margin: 0;
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.55
+        );
+
+    border-radius: 11px;
+
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.12
+        );
+
+    color: #f1d077;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.maze-control:hover {
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.22
+        );
+}
+
+.maze-control:active {
+    transform: scale(0.94);
+}
+
+.maze-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.maze-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.maze-down {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.maze-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.maze-control-help {
+    margin-top: 13px;
+
+    color: #83958e;
+
+    text-align: center;
+
+    font-size: 12px;
+}
+
+
+/* RESULT */
+
+.maze-result {
+    max-width: 480px;
+
+    margin:
+        30px auto
+        0;
+
+    padding: 28px 20px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.65
+        );
+
+    border-radius: 16px;
+
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.08
+        );
+
+    text-align: center;
+}
+
+.maze-result[hidden] {
+    display: none;
+}
+
+.maze-result-icon {
+    font-size: 45px;
+}
+
+.maze-result h2 {
+    margin:
+        12px 0
+        8px;
+
+    font-family: Georgia, serif;
+}
+
+.maze-result p {
+    color: #c1cbc7;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 550px) {
+
+    .maze-page {
+        width: 96%;
+    }
+
+    .maze-title-icon {
+        font-size: 42px;
+    }
+
+    .maze-header h1 {
+        font-size: 32px;
+    }
+
+    .maze-introduction {
+        font-size: 14px;
+    }
+
+    .maze-frame {
+        padding: 4px;
+    }
+
+}
