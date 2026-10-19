@@ -35,284 +35,7 @@ accepted, so they do not need to be
 repeated here.
 */
 
-const ADDITIONAL_VALID_GUESSES = [
-    "ABOUT",
-    "ABOVE",
-    "ACTOR",
-    "ADMIT",
-    "ADULT",
-    "AFTER",
-    "AGAIN",
-    "AGENT",
-    "AGREE",
-    "AHEAD",
-    "ALARM",
-    "ALBUM",
-    "ALERT",
-    "ALIEN",
-    "ALIVE",
-    "ALLOW",
-    "ALONE",
-    "ALONG",
-    "ALTER",
-    "AMONG",
-    "APPLE",
-    "APPLY",
-    "ARGUE",
-    "ARISE",
-    "AUDIO",
-    "AVOID",
-    "AWAKE",
-    "AWARD",
-    "AWARE",
-    "BADLY",
-    "BAKER",
-    "BASIC",
-    "BEACH",
-    "BEGAN",
-    "BEGIN",
-    "BEING",
-    "BELOW",
-    "BLACK",
-    "BLAME",
-    "BLIND",
-    "BLOCK",
-    "BOARD",
-    "BRAIN",
-    "BRAVE",
-    "BREAD",
-    "BREAK",
-    "BRING",
-    "BROWN",
-    "BUILD",
-    "BUYER",
-    "CARRY",
-    "CATCH",
-    "CAUSE",
-    "CHAIN",
-    "CHAIR",
-    "CHARM",
-    "CHART",
-    "CHASE",
-    "CHEER",
-    "CHEST",
-    "CHILD",
-    "CHOIR",
-    "CLAIM",
-    "CLASS",
-    "CLEAN",
-    "CLEAR",
-    "CLIMB",
-    "CLOCK",
-    "CLOSE",
-    "CLOUD",
-    "COACH",
-    "COAST",
-    "COLOR",
-    "COULD",
-    "COUNT",
-    "COURT",
-    "COVER",
-    "CRASH",
-    "CRAZY",
-    "CREAM",
-    "CRIME",
-    "CROSS",
-    "CROWD",
-    "DANCE",
-    "DEATH",
-    "DELAY",
-    "DOUBT",
-    "DOZEN",
-    "DRAFT",
-    "DREAM",
-    "DRINK",
-    "DRIVE",
-    "EARLY",
-    "EARTH",
-    "EIGHT",
-    "EMPTY",
-    "ENJOY",
-    "ENTER",
-    "ENTRY",
-    "EQUAL",
-    "ERROR",
-    "EVENT",
-    "EVERY",
-    "EXACT",
-    "EXIST",
-    "EXTRA",
-    "FAITH",
-    "FALSE",
-    "FAULT",
-    "FIELD",
-    "FINAL",
-    "FIRST",
-    "FIXED",
-    "FLOOR",
-    "FOCUS",
-    "FORCE",
-    "FRAME",
-    "FRESH",
-    "FRONT",
-    "FRUIT",
-    "FUNNY",
-    "GLASS",
-    "GRAND",
-    "GRASS",
-    "GREAT",
-    "GREEN",
-    "GROUP",
-    "GUESS",
-    "HAPPY",
-    "HEART",
-    "HEAVY",
-    "HELLO",
-    "HORSE",
-    "HOTEL",
-    "HOUSE",
-    "HUMAN",
-    "IDEAL",
-    "IMAGE",
-    "INDEX",
-    "INNER",
-    "INPUT",
-    "ISSUE",
-    "JOINT",
-    "JUDGE",
-    "KNOWN",
-    "LARGE",
-    "LATER",
-    "LAUGH",
-    "LEARN",
-    "LEAST",
-    "LEAVE",
-    "LEVEL",
-    "LOCAL",
-    "LUCKY",
-    "LUNCH",
-    "MAGIC",
-    "MAJOR",
-    "MAKER",
-    "MARCH",
-    "MATCH",
-    "MAYBE",
-    "METAL",
-    "MODEL",
-    "MONEY",
-    "MONTH",
-    "MOUSE",
-    "MOUTH",
-    "MOVIE",
-    "MUSIC",
-    "NIGHT",
-    "NORTH",
-    "NOTED",
-    "NOVEL",
-    "NURSE",
-    "OFFER",
-    "OFFICE",
-    "OTHER",
-    "OWNER",
-    "PANEL",
-    "PAPER",
-    "PARTY",
-    "PEACE",
-    "PHONE",
-    "PIECE",
-    "PLACE",
-    "PLAIN",
-    "PLANE",
-    "PLANT",
-    "PLATE",
-    "POINT",
-    "POWER",
-    "PRESS",
-    "PRICE",
-    "PRIDE",
-    "PRIME",
-    "PRINT",
-    "PRIZE",
-    "PROUD",
-    "QUICK",
-    "QUIET",
-    "RADIO",
-    "RAISE",
-    "RANGE",
-    "REACH",
-    "READY",
-    "RIGHT",
-    "RIVER",
-    "ROUND",
-    "ROYAL",
-    "SCALE",
-    "SCENE",
-    "SCORE",
-    "SECRET",
-    "SHARE",
-    "SHARP",
-    "SHEET",
-    "SHELF",
-    "SHIFT",
-    "SHINE",
-    "SHOCK",
-    "SHORT",
-    "SHOWN",
-    "SIGHT",
-    "SINCE",
-    "SKILL",
-    "SMALL",
-    "SMART",
-    "SMILE",
-    "SOLVE",
-    "SOUND",
-    "SPACE",
-    "SPEAK",
-    "SPEED",
-    "SPEND",
-    "STAGE",
-    "STAMP",
-    "STAND",
-    "START",
-    "STATE",
-    "STILL",
-    "STOCK",
-    "STONE",
-    "STORE",
-    "STORY",
-    "STYLE",
-    "TABLE",
-    "TEACH",
-    "THEME",
-    "THERE",
-    "THING",
-    "THINK",
-    "THREE",
-    "TODAY",
-    "TOTAL",
-    "TOUCH",
-    "TOWER",
-    "TRAIN",
-    "TRIAL",
-    "TRUST",
-    "TRUTH",
-    "UNDER",
-    "UNION",
-    "VALUE",
-    "VIDEO",
-    "VISIT",
-    "VOICE",
-    "WASTE",
-    "WATCH",
-    "WATER",
-    "WHITE",
-    "WHOLE",
-    "WOMAN",
-    "WORLD",
-    "WRITE",
-    "WRONG",
-    "YOUNG"
-];
+
 
 
 /*
@@ -323,13 +46,55 @@ This filter ensures that only valid
 five-letter words enter the game.
 */
 
-const VALID_GUESSES = new Set(
-    [
-        ...SOLUTION_WORDS,
-        ...ADDITIONAL_VALID_GUESSES
-    ].filter(word => word.length === 5)
-);
+let VALID_GUESSES = new Set();
 
+
+async function loadValidGuesses() {
+
+    try {
+
+        const response = await fetch("words.txt");
+
+        if (!response.ok) {
+            throw new Error("Could not load words.txt");
+        }
+
+        const text = await response.text();
+
+        const words = text
+            .split(/\r?\n/)
+            .map(word => word.trim().toUpperCase())
+            .filter(word => /^[A-Z]{5}$/.test(word));
+
+
+        VALID_GUESSES = new Set([
+            ...words,
+            ...SOLUTION_WORDS
+        ]);
+
+
+        console.log(
+            "Loaded",
+            VALID_GUESSES.size,
+            "valid Wordle guesses"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load word list:",
+            error
+        );
+
+        /*
+        Fallback:
+        At least allow the possible answers.
+        */
+
+        VALID_GUESSES =
+            new Set(SOLUTION_WORDS);
+    }
+}
 
 /* --------------------------------
    GAME SETTINGS
@@ -1195,4 +960,16 @@ resetButton.addEventListener(
    START
 -------------------------------- */
 
-initialiseGame();
+async function startGame() {
+
+    showMessage("Loading word list...");
+
+    await loadValidGuesses();
+
+    initialiseGame();
+
+    clearMessage();
+}
+
+
+startGame();
