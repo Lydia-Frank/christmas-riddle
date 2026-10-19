@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Riddle 1 - Christmas Word</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+</head>
+
+<body>
+
+<main class="container wordle-page">
+
+    <a
+        class="back-link"
+        href="../index.html"
+    >
+        ← Back to riddles
+    </a>
+
+
+    <header class="wordle-header">
+
+        <div class="small-title">
+            RIDDLE 01
+        </div>
+
+        <div class="wordle-title-row">
+
+            <span class="wordle-title-icon">
+                🔤
+            </span>
+
+            <h1>
+                Christmas
+                <span>Word</span>
+            </h1>
+
+        </div>
+
+        <p class="wordle-introduction">
+            Guess the hidden five-letter word.
+            You have six attempts.
+        </p>
+
+    </header>
+
+
+    <!-- Instructions -->
+
+    <section class="wordle-instructions">
+
+        <div class="example-row">
+
+            <div class="example-tile correct">
+                S
+            </div>
+
+            <p>
+                Correct letter and position
+            </p>
+
+        </div>
+
+
+        <div class="example-row">
+
+            <div class="example-tile present">
+                A
+            </div>
+
+            <p>
+                Correct letter, wrong position
+            </p>
+
+        </div>
+
+
+        <div class="example-row">
+
+            <div class="example-tile absent">
+                T
+            </div>
+
+            <p>
+                Letter is not in the word
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Game message -->
+
+    <div
+        class="wordle-message"
+        id="wordleMessage"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- Wordle board -->
+
+    <section
+        class="wordle-grid"
+        id="wordleGrid"
+        aria-label="Word guessing board"
+    ></section>
+
+
+    <!-- Keyboard -->
+
+    <section
+        class="wordle-keyboard"
+        id="wordleKeyboard"
+        aria-label="On-screen keyboard"
+    ></section>
+
+
+    <!-- Completed-game panel -->
+
+    <section
+        class="wordle-result"
+        id="wordleResult"
+        hidden
+    >
+
+        <div class="wordle-result-icon">
+            🎄
+        </div>
+
+        <h2 id="resultTitle">
+            Riddle solved!
+        </h2>
+
+        <p id="resultText"></p>
+
+        <a
+            class="wordle-return-button"
+            href="../index.html"
+        >
+            Return to the riddles
+        </a>
+
+    </section>
+
+
+    <!-- Development reset button -->
+
+    <button
+        class="wordle-reset-button"
+        id="resetWordleButton"
+        type="button"
+    >
+        Reset Riddle 1
+    </button>
+
+</main>
+
+
+<script src="riddle1.js"></script>
+
+</body>
+
+</html>
