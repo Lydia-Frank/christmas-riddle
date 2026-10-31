@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Riddle 4 - The Hidden Message</title>
+    <title>Riddle 4 - The Picture Puzzle</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
 <body>
 
 <main
-    class="container riddle-page"
+    class="container puzzle-page riddle-page"
     data-riddle-number="4"
 >
 
@@ -109,32 +109,99 @@
         hidden
     >
 
-        <header class="riddle-content-header">
+        <header class="puzzle-header">
 
             <div class="small-title">
                 RIDDLE 04
             </div>
 
-            <div class="wordle-title-row">
-
-                <span class="wordle-title-icon">
-                    👀
-                </span>
-
-                <h1>
-                    The Hidden
-                    <span>Message</span>
-                </h1>
-
+            <div class="puzzle-title-icon">
+                🧩
             </div>
 
-            <p class="password-gate-intro">
-                Not everything is as it seems.
-                Coming soon — this page is unlocked
-                and ready for the puzzle.
+            <h1>
+                The Picture
+                <span>Puzzle</span>
+            </h1>
+
+            <p class="puzzle-introduction">
+                A Christmas scene has been cut into
+                twenty-five pieces. Drag a piece onto
+                the board, or tap a piece then tap a
+                square to place it.
             </p>
 
         </header>
+
+
+        <div
+            class="puzzle-message"
+            id="puzzleMessage"
+            aria-live="polite"
+        >
+            Rebuild the snowy scene.
+        </div>
+
+
+        <section
+            class="puzzle-board"
+            id="puzzleBoard"
+            aria-label="Puzzle board, 5 by 5"
+        ></section>
+
+
+        <section
+            class="puzzle-tray"
+            id="puzzleTray"
+            aria-label="Scrambled puzzle pieces"
+        ></section>
+
+
+        <p class="puzzle-help">
+            Drag pieces onto empty squares. Tap a
+            placed piece to return it to the tray.
+        </p>
+
+
+        <!-- SUCCESS -->
+
+        <section
+            class="puzzle-result"
+            id="puzzleResult"
+            hidden
+        >
+
+            <div class="puzzle-result-icon">
+                ⛄🎄
+            </div>
+
+            <h2>
+                Picture complete!
+            </h2>
+
+            <p id="puzzleResultText">
+                You put the Christmas scene back together.
+            </p>
+
+            <a
+                class="wordle-return-button"
+                href="../index.html"
+            >
+                Return to the riddles
+            </a>
+
+        </section>
+
+
+        <!-- DEVELOPMENT RESET -->
+
+        <button
+            class="wordle-reset-button"
+            id="resetPuzzle"
+            type="button"
+        >
+            Reset Riddle 4
+        </button>
 
     </section>
 
@@ -142,6 +209,7 @@
 
 
 <script src="password-gate.js"></script>
+<script src="riddle4.js"></script>
 
 </body>
 
