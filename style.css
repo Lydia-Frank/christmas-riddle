@@ -1982,19 +1982,11 @@
     min-height: 1.4em;
 }
 
-.puzzle-board {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, 1fr);
-
-    grid-template-rows:
-        repeat(5, 1fr);
-
-    /* No gutters — assembled pieces must abut so image
-       slices meet without missing strips between cells. */
-    gap: 0;
-
+/*
+Frame holds padding/border so the grid itself can
+match the photo aspect (1024×723) with no inset.
+*/
+.puzzle-board-frame {
     width: 100%;
 
     max-width: 520px;
@@ -2021,8 +2013,30 @@
             95,
             0.35
         );
+}
 
-    aspect-ratio: 4 / 3;
+.puzzle-board {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    grid-template-rows:
+        repeat(5, 1fr);
+
+    /* No gutters — assembled pieces must abut so image
+       slices meet without missing strips between cells. */
+    gap: 0;
+
+    width: 100%;
+
+    padding: 0;
+
+    margin: 0;
+
+    /* Match christmas-puzzle.jpg (1024×723) so each
+       cell is the same rectangle as its image slice. */
+    aspect-ratio: 1024 / 723;
 
     overflow: hidden;
 
@@ -2101,13 +2115,22 @@
 
     padding: 0;
 
+    margin: 0;
+
     border: 0;
+    outline: none;
 
     border-radius: 0;
+
+    box-shadow: none;
 
     cursor: grab;
 
     background-repeat: no-repeat;
+
+    /* Explicit size both axes — a single 500% leaves
+       height:auto and can letterbox inside non-matching cells. */
+    background-size: 500% 500%;
 
     background-color: #12352c;
 
@@ -2120,6 +2143,16 @@
 
 .puzzle-piece:active {
     cursor: grabbing;
+}
+
+.puzzle-piece.is-locked {
+    cursor: default;
+
+    -webkit-user-drag: none;
+}
+
+.puzzle-piece.is-locked:active {
+    cursor: default;
 }
 
 .puzzle-piece.selected {
@@ -2176,7 +2209,7 @@
 }
 
 .puzzle-tray .puzzle-piece {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1024 / 723;
 
     border-radius: 4px;
 
@@ -2273,7 +2306,7 @@
         font-size: 14px;
     }
 
-    .puzzle-board {
+    .puzzle-board-frame {
         padding: 5px;
     }
 

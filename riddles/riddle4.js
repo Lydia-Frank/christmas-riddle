@@ -115,14 +115,33 @@ function pieceBackground(pieceIndex) {
     const y =
         (row / (GRID_SIZE - 1)) * 100;
 
+    const size =
+        (GRID_SIZE * 100) + "%";
+
     return {
         backgroundImage:
             "url(" + IMAGE_SRC + ")",
+        /*
+        Both axes must be GRID_SIZE×100%.
+        A single percentage leaves height:auto,
+        which letterboxes when the cell aspect
+        does not match the photo.
+        */
         backgroundSize:
-            (GRID_SIZE * 100) + "%",
+            size + " " + size,
         backgroundPosition:
             x + "% " + y + "%"
     };
+
+}
+
+
+function isPieceLocked(pieceIndex, slotIndex) {
+
+    return (
+        typeof slotIndex === "number" &&
+        pieceIndex === slotIndex
+    );
 
 }
 
@@ -355,12 +374,42 @@ function createPieceElement(pieceIndex, origin, slotIndex) {
             String(slotIndex);
     }
 
+    applyPieceStyle(piece, pieceIndex);
+
+    const locked =
+        origin === "board" &&
+        isPieceLocked(pieceIndex, slotIndex);
+
+    if (locked) {
+
+        piece.classList.add("is-locked");
+        piece.draggable = false;
+        piece.setAttribute(
+            "aria-label",
+            "Puzzle piece " +
+            (pieceIndex + 1) +
+            ", locked in place"
+        );
+        piece.setAttribute(
+            "aria-disabled",
+            "true"
+        );
+
+        if (!solved) {
+            piece.addEventListener(
+                "click",
+                onLockedPieceClick
+            );
+        }
+
+        return piece;
+
+    }
+
     piece.setAttribute(
         "aria-label",
         "Puzzle piece " + (pieceIndex + 1)
     );
-
-    applyPieceStyle(piece, pieceIndex);
 
     if (!solved) {
 
@@ -437,9 +486,13 @@ function renderBoard() {
 
         } else {
 
-            if (
-                pieceIndex === slot
-            ) {
+            const locked =
+                isPieceLocked(
+                    pieceIndex,
+                    slot
+                );
+
+            if (locked) {
                 cell.classList.add(
                     "correct"
                 );
@@ -453,7 +506,11 @@ function renderBoard() {
                 )
             );
 
-            if (!solved) {
+            /*
+            Locked cells reject drops so a
+            correct piece cannot be swapped out.
+            */
+            if (!solved && !locked) {
 
                 cell.addEventListener(
                     "dragover",
@@ -558,6 +615,21 @@ function placePieceOnBoard(pieceIndex, targetSlot, fromOrigin, fromSlot) {
         return;
     }
 
+    /*
+    Never move a piece that is already
+    locked in its correct slot.
+    */
+    if (
+        fromOrigin === "board" &&
+        isPieceLocked(pieceIndex, fromSlot)
+    ) {
+        clearSelection();
+        showMessage(
+            "That piece is locked in place."
+        );
+        return;
+    }
+
     const occupying =
         boardSlots[targetSlot];
 
@@ -567,6 +639,21 @@ function placePieceOnBoard(pieceIndex, targetSlot, fromOrigin, fromSlot) {
 
     if (occupying === pieceIndex) {
         clearSelection();
+        return;
+    }
+
+    /*
+    Correct pieces stay put — no swap,
+    no overwrite.
+    */
+    if (
+        occupying !== null &&
+        isPieceLocked(occupying, targetSlot)
+    ) {
+        clearSelection();
+        showMessage(
+            "That piece is locked in place."
+        );
         return;
     }
 
@@ -623,6 +710,14 @@ function returnPieceToTray(pieceIndex, fromSlot) {
         return;
     }
 
+    if (isPieceLocked(pieceIndex, fromSlot)) {
+        clearSelection();
+        showMessage(
+            "That piece is locked in place."
+        );
+        return;
+    }
+
     boardSlots[fromSlot] = null;
     trayOrder.push(pieceIndex);
 
@@ -641,6 +736,19 @@ function returnPieceToTray(pieceIndex, fromSlot) {
    CLICK / TAP
 ================================= */
 
+function onLockedPieceClick(event) {
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    clearSelection();
+    showMessage(
+        "That piece is locked in place."
+    );
+
+}
+
+
 function onPieceClick(event) {
 
     event.stopPropagation();
@@ -657,6 +765,17 @@ function onPieceClick(event) {
         piece.dataset.slot === undefined
             ? null
             : Number(piece.dataset.slot);
+
+    if (
+        origin === "board" &&
+        isPieceLocked(pieceIndex, slotIndex)
+    ) {
+        clearSelection();
+        showMessage(
+            "That piece is locked in place."
+        );
+        return;
+    }
 
     /*
     Second tap on a selected board piece
@@ -764,15 +883,27 @@ function onDragStart(event) {
 
     const piece = event.currentTarget;
 
-    dragPiece =
+    const pieceIndex =
         Number(piece.dataset.piece);
+
+    const fromSlot =
+        piece.dataset.slot === undefined
+            ? null
+            : Number(piece.dataset.slot);
+
+    if (
+        piece.dataset.origin === "board" &&
+        isPieceLocked(pieceIndex, fromSlot)
+    ) {
+        event.preventDefault();
+        return;
+    }
+
+    dragPiece = pieceIndex;
 
     dragFrom = {
         origin: piece.dataset.origin,
-        slot:
-            piece.dataset.slot === undefined
-                ? null
-                : Number(piece.dataset.slot)
+        slot: fromSlot
     };
 
     piece.classList.add("dragging");
