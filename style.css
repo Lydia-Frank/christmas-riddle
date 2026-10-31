@@ -1991,7 +1991,9 @@
     grid-template-rows:
         repeat(5, 1fr);
 
-    gap: 3px;
+    /* No gutters — assembled pieces must abut so image
+       slices meet without missing strips between cells. */
+    gap: 0;
 
     width: 100%;
 
@@ -2022,6 +2024,8 @@
 
     aspect-ratio: 4 / 3;
 
+    overflow: hidden;
+
     touch-action: manipulation;
 }
 
@@ -2031,7 +2035,9 @@
     min-width: 0;
     min-height: 0;
 
-    border-radius: 4px;
+    /* Square seams on the board so rounded corners
+       don't nibble image pixels at tile junctions. */
+    border-radius: 0;
 
     background:
         rgba(
@@ -2057,15 +2063,34 @@
     outline-offset: -3px;
 }
 
-.puzzle-slot.correct {
+/* Correct feedback overlays a corner pip only —
+   never an inset frame that covers edge pixels. */
+.puzzle-slot.correct::after {
+    content: "";
+
+    position: absolute;
+
+    top: 4px;
+    right: 4px;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #d8b75f;
+
     box-shadow:
-        inset 0 0 0 2px
-        rgba(
-            209,
-            173,
-            85,
-            0.55
-        );
+        0 0 0 1px
+        rgba(0, 0, 0, 0.35);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.puzzle-board.is-solved .puzzle-slot.correct::after {
+    display: none;
 }
 
 .puzzle-piece {
@@ -2078,7 +2103,7 @@
 
     border: 0;
 
-    border-radius: 4px;
+    border-radius: 0;
 
     cursor: grab;
 
@@ -2152,6 +2177,8 @@
 
 .puzzle-tray .puzzle-piece {
     aspect-ratio: 4 / 3;
+
+    border-radius: 4px;
 
     box-shadow:
         0 4px 10px
@@ -2247,8 +2274,6 @@
     }
 
     .puzzle-board {
-        gap: 2px;
-
         padding: 5px;
     }
 

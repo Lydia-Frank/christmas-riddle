@@ -392,6 +392,11 @@ function renderBoard() {
 
     boardElement.innerHTML = "";
 
+    boardElement.classList.toggle(
+        "is-solved",
+        solved
+    );
+
     for (
         let slot = 0;
         slot < PIECE_COUNT;
