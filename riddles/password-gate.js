@@ -15,6 +15,65 @@ players do not need to re-enter the code.
 
 const PLACEHOLDER_PASSWORD = "00000";
 
+const RIDDLE4_PASSWORD = "31642";
+
+const WORDLE_ANSWER_KEY = "wordleRiddle1Answer";
+
+
+/*
+Alphabet decoder (A–I = 1–9, then repeats):
+A1 B2 C3 D4 E5 F6 G7 H8 I9
+J1 K2 L3 M4 N5 O6 P7 Q8 R9
+S1 T2 U3 V4 W5 X6 Y7 Z8
+*/
+function decodeWordToCode(word) {
+
+    if (typeof word !== "string") {
+        return "";
+    }
+
+    const letters = word
+        .trim()
+        .toUpperCase();
+
+    if (!/^[A-Z]+$/.test(letters)) {
+        return "";
+    }
+
+    let code = "";
+
+    for (let i = 0; i < letters.length; i++) {
+        const digit =
+            ((letters.charCodeAt(i) - 65) % 9) + 1;
+        code += String(digit);
+    }
+
+    return code;
+}
+
+
+function getWordleUnlockCode() {
+
+    const answer =
+        localStorage.getItem(WORDLE_ANSWER_KEY);
+
+    return decodeWordToCode(answer);
+}
+
+
+function getRequiredPassword(riddleNumber) {
+
+    if (riddleNumber === 2) {
+        return getWordleUnlockCode();
+    }
+
+    if (riddleNumber === 4) {
+        return RIDDLE4_PASSWORD;
+    }
+
+    return PLACEHOLDER_PASSWORD;
+}
+
 
 function unlockStorageKey(riddleNumber) {
     return "riddle" + riddleNumber + "Unlocked";
@@ -117,7 +176,13 @@ function initPasswordGate() {
             const entered =
                 inputElement.value.trim();
 
-            if (entered === PLACEHOLDER_PASSWORD) {
+            const required =
+                getRequiredPassword(riddleNumber);
+
+            if (
+                required &&
+                entered === required
+            ) {
 
                 clearPasswordError(errorElement);
                 markRiddleUnlocked(riddleNumber);

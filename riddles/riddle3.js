@@ -2,35 +2,76 @@
 
 
 /* =================================
-   MAZE SETTINGS
+   FIXED MAZE LAYOUT
+
+   Digitized from the provided maze
+   image. Each hex digit encodes one
+   cell's walls:
+
+   bit 0 = top
+   bit 1 = right
+   bit 2 = bottom
+   bit 3 = left
 ================================= */
 
-/*
-Increase MAZE_SIZE to make the maze
-larger and more difficult.
+const MAZE_ROWS = 29;
 
-Recommended values:
+const MAZE_COLS = 35;
 
-15 = medium
-21 = difficult
-25 = very difficult
-31 = extremely difficult
+const ENTRANCE = {
+    row: 1,
+    col: 0
+};
 
-Keep it as an odd number.
-*/
-
-const MAZE_SIZE = 25;
-
+const EXIT = {
+    row: 21,
+    col: 34
+};
 
 /*
-Direction data:
-
-rowChange and colChange determine
-movement on the grid.
-
-opposite is used when removing walls
-between neighbouring cells.
+One character per cell, row-major.
+Red/pink annotations from the source
+image are NOT included — only walls.
 */
+
+const MAZE_WALL_MASKS = [
+
+    "B93D51791795793917D1393D153B9553B93",
+    "42839292C3A97AAEC53EC683C3EAE97AC2A",
+    "BEAC286E946856A95169392C38147AB83AA",
+    "85696C17C17C53C6945686C7C6C13A86AEA",
+    "A95697AB96955693ABD541579796E869696",
+    "E813A96C43C397AEC2979697AD417EBC3C3",
+    "BEAC6A93943C696956C169456916BB816BA",
+    "A96BD6AC43C57C56D3D43C3B96C16AE87AA",
+    "8694796B969551555013C3C4693C381696A",
+    "C3A956D043AD3C557EAE96D556ABC6C3C16",
+    "BAAABD56968169555569695513AA9394543",
+    "A86C43BBC3AA903D5514383BAAA86C6D3BE",
+    "8697942A96AAEAC797A96AEAEAAC3939683",
+    "A929696AC3AAD2D3C56C3A96D2A96EAC56A",
+    "AAAAB87A96AC3C1455396C453AAC392D53A",
+    "AAEAAED443ABC3E93D2C39396847C6C3946",
+    "AC3AC5513AA83C56EBA906C6BA939396AD3",
+    "C7AC1796C686C55796AEC3BD42AC6C692BA",
+    "95296BC39383B955456956C552C39396C2A",
+    "C7C6BC102C2E807D553C55557A942C6D16A",
+    "955543AEC3C3AC115541155516C7C393816",
+    "C3957C69529687EC517AC7D569793AE86C5",
+    "96C553D6D2E9695516D293939696C43A953",
+    "A9557A955296BA93AD386C2AAD45796EABA",
+    "A85552ABD6C3AEAAC3AAD16C07D1383BAAA",
+    "AAD516A85516A96ABE8696D3C57EC6A86C6",
+    "AC3BE9683BABC43A812BA916955153AA913",
+    "83C2D6D6C2AC396AC02C46ED693C3C42EAA",
+    "EC56D55556C56C7C56C5557D56C56D5456E"
+
+];
+
+
+/* =================================
+   DIRECTIONS
+================================= */
 
 const DIRECTIONS = {
 
@@ -71,14 +112,14 @@ const DIRECTIONS = {
 
 const STORAGE_KEYS = {
 
-    maze:
-        "mazeRiddle3Layout",
-
     player:
         "mazeRiddle3Player",
 
     moves:
         "mazeRiddle3Moves",
+
+    trail:
+        "mazeRiddle3Trail",
 
     solved:
         "mazeRiddle3Solved"
@@ -93,14 +134,27 @@ const STORAGE_KEYS = {
 let maze = [];
 
 let player = {
-    row: 0,
-    col: 0
+    row: ENTRANCE.row,
+    col: ENTRANCE.col
 };
 
 let santa = {
-    row: MAZE_SIZE - 1,
-    col: MAZE_SIZE - 1
+    row: EXIT.row,
+    col: EXIT.col
 };
+
+/*
+Stack of cells visited on the current
+route. Backtracking pops the tip so the
+red line erases itself.
+*/
+
+let trail = [
+    {
+        row: ENTRANCE.row,
+        col: ENTRANCE.col
+    }
+];
 
 let moves = 0;
 
@@ -149,344 +203,72 @@ const resetButton =
 
 
 /* =================================
-   CREATE CELL
+   BUILD FIXED MAZE
 ================================= */
 
-function createCell(row, col) {
+function wallsFromMask(mask) {
 
     return {
-
-        row: row,
-
-        col: col,
-
-        visited: false,
-
-        walls: {
-            top: true,
-            right: true,
-            bottom: true,
-            left: true
-        }
-
+        top:
+            (mask & 1) !== 0,
+        right:
+            (mask & 2) !== 0,
+        bottom:
+            (mask & 4) !== 0,
+        left:
+            (mask & 8) !== 0
     };
+
 }
 
 
-/* =================================
-   CREATE EMPTY GRID
-================================= */
+function buildFixedMaze() {
 
-function createEmptyMaze() {
-
-    const newMaze = [];
+    const built = [];
 
     for (
         let row = 0;
-        row < MAZE_SIZE;
+        row < MAZE_ROWS;
         row++
     ) {
+
+        const rowMasks =
+            MAZE_WALL_MASKS[row];
 
         const mazeRow = [];
 
         for (
             let col = 0;
-            col < MAZE_SIZE;
+            col < MAZE_COLS;
             col++
         ) {
 
-            mazeRow.push(
-                createCell(row, col)
-            );
-        }
-
-        newMaze.push(mazeRow);
-    }
-
-    return newMaze;
-}
-
-
-/* =================================
-   GENERATE MAZE
-
-   Uses recursive backtracking.
-
-   Every cell becomes reachable, but
-   there is only one route between
-   each pair of cells.
-================================= */
-
-function generateMaze() {
-
-    maze = createEmptyMaze();
-
-    const stack = [];
-
-    let currentCell =
-        maze[0][0];
-
-    currentCell.visited = true;
-
-    let visitedCells = 1;
-
-    const totalCells =
-        MAZE_SIZE * MAZE_SIZE;
-
-
-    while (
-        visitedCells < totalCells
-    ) {
-
-        const neighbours =
-            getUnvisitedNeighbours(
-                currentCell
-            );
-
-
-        if (neighbours.length > 0) {
-
-            const randomIndex =
-                Math.floor(
-                    Math.random() *
-                    neighbours.length
+            const mask =
+                parseInt(
+                    rowMasks[col],
+                    16
                 );
 
+            mazeRow.push({
 
-            const next =
-                neighbours[randomIndex];
+                row: row,
 
+                col: col,
 
-            removeWalls(
-                currentCell,
-                next.cell,
-                next.direction
-            );
+                walls:
+                    wallsFromMask(
+                        mask
+                    )
 
-
-            stack.push(
-                currentCell
-            );
-
-
-            currentCell =
-                next.cell;
-
-
-            currentCell.visited =
-                true;
-
-
-            visitedCells++;
-
-        } else {
-
-            currentCell =
-                stack.pop();
+            });
 
         }
 
-    }
-
-
-    /*
-    The visited property is only
-    required while generating.
-    */
-
-    maze.forEach(row => {
-
-        row.forEach(cell => {
-
-            delete cell.visited;
-
-        });
-
-    });
-
-
-    localStorage.setItem(
-        STORAGE_KEYS.maze,
-        JSON.stringify(maze)
-    );
-
-}
-
-
-/* =================================
-   FIND UNVISITED NEIGHBOURS
-================================= */
-
-function getUnvisitedNeighbours(
-    cell
-) {
-
-    const neighbours = [];
-
-
-    Object.entries(
-        DIRECTIONS
-    )
-    .forEach(
-        ([name, direction]) => {
-
-            const newRow =
-                cell.row +
-                direction.rowChange;
-
-
-            const newCol =
-                cell.col +
-                direction.colChange;
-
-
-            if (
-                isInsideMaze(
-                    newRow,
-                    newCol
-                ) &&
-                !maze[newRow][newCol]
-                    .visited
-            ) {
-
-                neighbours.push({
-
-                    direction: name,
-
-                    cell:
-                        maze[newRow][newCol]
-
-                });
-
-            }
-
-        }
-    );
-
-
-    /*
-    Shuffle choices so the generated
-    maze is less predictable.
-    */
-
-    shuffleArray(neighbours);
-
-
-    return neighbours;
-}
-
-
-/* =================================
-   REMOVE WALLS
-================================= */
-
-function removeWalls(
-    currentCell,
-    nextCell,
-    directionName
-) {
-
-    const direction =
-        DIRECTIONS[directionName];
-
-
-    currentCell.walls[
-        direction.wall
-    ] = false;
-
-
-    nextCell.walls[
-        direction.opposite
-    ] = false;
-
-}
-
-
-/* =================================
-   SHUFFLE
-================================= */
-
-function shuffleArray(array) {
-
-    for (
-        let index =
-            array.length - 1;
-
-        index > 0;
-
-        index--
-    ) {
-
-        const randomIndex =
-            Math.floor(
-                Math.random() *
-                (index + 1)
-            );
-
-
-        [
-            array[index],
-            array[randomIndex]
-        ] = [
-            array[randomIndex],
-            array[index]
-        ];
+        built.push(mazeRow);
 
     }
 
-}
-
-
-/* =================================
-   LOAD OR GENERATE
-================================= */
-
-function loadOrGenerateMaze() {
-
-    const storedMaze =
-        localStorage.getItem(
-            STORAGE_KEYS.maze
-        );
-
-
-    if (storedMaze) {
-
-        try {
-
-            const parsedMaze =
-                JSON.parse(
-                    storedMaze
-                );
-
-
-            if (
-                Array.isArray(
-                    parsedMaze
-                ) &&
-                parsedMaze.length ===
-                    MAZE_SIZE
-            ) {
-
-                maze =
-                    parsedMaze;
-
-                return;
-
-            }
-
-        } catch (error) {
-
-            console.error(
-                "Could not restore maze:",
-                error
-            );
-
-        }
-
-    }
-
-
-    generateMaze();
+    return built;
 
 }
 
@@ -494,6 +276,16 @@ function loadOrGenerateMaze() {
 /* =================================
    LOAD PLAYER STATE
 ================================= */
+
+function sameCell(a, b) {
+
+    return (
+        a.row === b.row &&
+        a.col === b.col
+    );
+
+}
+
 
 function loadPlayerState() {
 
@@ -557,6 +349,87 @@ function loadPlayerState() {
     }
 
 
+    const storedTrail =
+        localStorage.getItem(
+            STORAGE_KEYS.trail
+        );
+
+
+    if (storedTrail) {
+
+        try {
+
+            const parsedTrail =
+                JSON.parse(
+                    storedTrail
+                );
+
+
+            if (
+                Array.isArray(
+                    parsedTrail
+                ) &&
+                parsedTrail.length > 0 &&
+                parsedTrail.every(
+                    cell =>
+                        isInsideMaze(
+                            cell.row,
+                            cell.col
+                        )
+                )
+            ) {
+
+                trail =
+                    parsedTrail;
+
+                /*
+                Keep player on the tip
+                of the restored trail.
+                */
+
+                const tip =
+                    trail[
+                        trail.length -
+                        1
+                    ];
+
+                player = {
+                    row: tip.row,
+                    col: tip.col
+                };
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Could not restore trail:",
+                error
+            );
+
+        }
+
+    }
+
+
+    if (
+        trail.length === 0 ||
+        !sameCell(
+            trail[trail.length - 1],
+            player
+        )
+    ) {
+
+        trail = [
+            {
+                row: player.row,
+                col: player.col
+            }
+        ];
+
+    }
+
+
     updateMoveCounter();
 
 }
@@ -579,6 +452,50 @@ function savePlayerState() {
         String(moves)
     );
 
+
+    localStorage.setItem(
+        STORAGE_KEYS.trail,
+        JSON.stringify(trail)
+    );
+
+}
+
+
+/* =================================
+   TRAIL (STACK PATH)
+================================= */
+
+function updateTrail(newRow, newCol) {
+
+    const next = {
+        row: newRow,
+        col: newCol
+    };
+
+
+    /*
+    Moving back onto the previous cell
+    pops the current tip — the red
+    segment disappears.
+    */
+
+    if (
+        trail.length >= 2 &&
+        sameCell(
+            trail[trail.length - 2],
+            next
+        )
+    ) {
+
+        trail.pop();
+
+        return;
+
+    }
+
+
+    trail.push(next);
+
 }
 
 
@@ -588,39 +505,57 @@ function savePlayerState() {
 
 function drawMaze() {
 
-    const displaySize =
+    const frame =
+        canvas.parentElement;
+
+
+    const maxWidth =
         Math.min(
-            canvas.parentElement
-                .clientWidth,
+            frame.clientWidth,
             700
         );
 
 
-    /*
-    Scale for sharpness on high-density
-    phone screens.
-    */
+    const cellSize =
+        Math.max(
+            8,
+            Math.floor(
+                maxWidth /
+                MAZE_COLS
+            )
+        );
+
+
+    const displayWidth =
+        cellSize *
+        MAZE_COLS;
+
+
+    const displayHeight =
+        cellSize *
+        MAZE_ROWS;
+
 
     const pixelRatio =
         window.devicePixelRatio || 1;
 
 
     canvas.width =
-        displaySize *
+        displayWidth *
         pixelRatio;
 
 
     canvas.height =
-        displaySize *
+        displayHeight *
         pixelRatio;
 
 
     canvas.style.width =
-        displaySize + "px";
+        displayWidth + "px";
 
 
     canvas.style.height =
-        displaySize + "px";
+        displayHeight + "px";
 
 
     context.setTransform(
@@ -636,22 +571,23 @@ function drawMaze() {
     context.clearRect(
         0,
         0,
-        displaySize,
-        displaySize
+        displayWidth,
+        displayHeight
     );
 
 
-    const cellSize =
-        displaySize /
-        MAZE_SIZE;
-
-
     drawBackground(
-        displaySize
+        displayWidth,
+        displayHeight
     );
 
 
     drawStartAndFinish(
+        cellSize
+    );
+
+
+    drawTrail(
         cellSize
     );
 
@@ -677,14 +613,17 @@ function drawMaze() {
    BACKGROUND
 ================================= */
 
-function drawBackground(size) {
+function drawBackground(
+    width,
+    height
+) {
 
     const gradient =
         context.createLinearGradient(
             0,
             0,
-            size,
-            size
+            width,
+            height
         );
 
 
@@ -707,8 +646,8 @@ function drawBackground(size) {
     context.fillRect(
         0,
         0,
-        size,
-        size
+        width,
+        height
     );
 
 }
@@ -722,25 +661,23 @@ function drawStartAndFinish(
     cellSize
 ) {
 
-    /*
-    Starting square
-    */
-
     context.fillStyle =
         "#dcefdc";
 
 
     context.fillRect(
-        1,
-        1,
+        ENTRANCE.col *
+            cellSize +
+            1,
+
+        ENTRANCE.row *
+            cellSize +
+            1,
+
         cellSize - 2,
         cellSize - 2
     );
 
-
-    /*
-    Santa square
-    */
 
     context.fillStyle =
         "#f8dddd";
@@ -763,6 +700,77 @@ function drawStartAndFinish(
 
 
 /* =================================
+   DRAW TRAIL
+================================= */
+
+function drawTrail(cellSize) {
+
+    if (trail.length < 2) {
+        return;
+    }
+
+
+    context.strokeStyle =
+        "#FF0000";
+
+
+    context.lineWidth =
+        Math.max(
+            2,
+            cellSize * 0.28
+        );
+
+
+    context.lineCap =
+        "round";
+
+
+    context.lineJoin =
+        "round";
+
+
+    context.beginPath();
+
+
+    trail.forEach((cell, index) => {
+
+        const x =
+            cell.col *
+                cellSize +
+            cellSize / 2;
+
+
+        const y =
+            cell.row *
+                cellSize +
+            cellSize / 2;
+
+
+        if (index === 0) {
+
+            context.moveTo(
+                x,
+                y
+            );
+
+        } else {
+
+            context.lineTo(
+                x,
+                y
+            );
+
+        }
+
+    });
+
+
+    context.stroke();
+
+}
+
+
+/* =================================
    DRAW WALLS
 ================================= */
 
@@ -771,11 +779,6 @@ function drawWalls(cellSize) {
     context.strokeStyle =
         "#173c31";
 
-
-    /*
-    Thin enough to preserve the maze
-    detail on a phone screen.
-    */
 
     context.lineWidth =
         Math.max(
@@ -980,11 +983,6 @@ function movePlayer(
         ];
 
 
-    /*
-    No movement if a wall blocks
-    this direction.
-    */
-
     if (
         currentCell.walls[
             direction.wall
@@ -1022,6 +1020,12 @@ function movePlayer(
         return;
 
     }
+
+
+    updateTrail(
+        newRow,
+        newCol
+    );
 
 
     player.row =
@@ -1078,10 +1082,6 @@ function completeMaze() {
         "true"
     );
 
-
-    /*
-    Used by homepage progress bar.
-    */
 
     localStorage.setItem(
         "riddle3",
@@ -1162,9 +1162,9 @@ function isInsideMaze(
 
     return (
         row >= 0 &&
-        row < MAZE_SIZE &&
+        row < MAZE_ROWS &&
         col >= 0 &&
-        col < MAZE_SIZE
+        col < MAZE_COLS
     );
 
 }
@@ -1424,7 +1424,7 @@ resetButton.addEventListener(
     () => {
 
         localStorage.removeItem(
-            STORAGE_KEYS.maze
+            "mazeRiddle3Layout"
         );
 
         localStorage.removeItem(
@@ -1433,6 +1433,10 @@ resetButton.addEventListener(
 
         localStorage.removeItem(
             STORAGE_KEYS.moves
+        );
+
+        localStorage.removeItem(
+            STORAGE_KEYS.trail
         );
 
         localStorage.removeItem(
@@ -1456,7 +1460,17 @@ resetButton.addEventListener(
 
 function initialiseMaze() {
 
-    loadOrGenerateMaze();
+    /*
+    Drop any previously generated
+    random maze from older versions.
+    */
+
+    localStorage.removeItem(
+        "mazeRiddle3Layout"
+    );
+
+
+    maze = buildFixedMaze();
 
     loadPlayerState();
 
