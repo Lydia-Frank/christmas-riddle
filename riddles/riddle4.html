@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Riddle 4 - The Hidden Message</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+</head>
+
+<body>
+
+<main
+    class="container riddle-page"
+    data-riddle-number="4"
+>
+
+    <a
+        class="back-link"
+        href="../index.html"
+    >
+        ← Back to riddles
+    </a>
+
+
+    <!-- Password gate -->
+
+    <section
+        class="password-gate"
+        id="passwordGate"
+    >
+
+        <div class="small-title">
+            RIDDLE 04
+        </div>
+
+        <div class="password-gate-icon">
+            🔐
+        </div>
+
+        <h1>
+            Enter the
+            <span>code</span>
+        </h1>
+
+        <p class="password-gate-intro">
+            Solve the previous riddle, then use
+            your decoder to find the five-digit
+            code that unlocks this challenge.
+        </p>
+
+        <form
+            class="password-form"
+            id="passwordForm"
+        >
+
+            <label
+                class="password-label"
+                for="passwordInput"
+            >
+                Access code
+            </label>
+
+            <input
+                class="password-input"
+                id="passwordInput"
+                name="password"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="5"
+                placeholder="•••••"
+                required
+            >
+
+            <p
+                class="password-error"
+                id="passwordError"
+                role="alert"
+                hidden
+            ></p>
+
+            <button
+                class="solve-button"
+                type="submit"
+            >
+                Unlock riddle
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Riddle content (shown after unlock) -->
+
+    <section
+        class="riddle-content"
+        id="riddleContent"
+        hidden
+    >
+
+        <header class="riddle-content-header">
+
+            <div class="small-title">
+                RIDDLE 04
+            </div>
+
+            <div class="wordle-title-row">
+
+                <span class="wordle-title-icon">
+                    👀
+                </span>
+
+                <h1>
+                    The Hidden
+                    <span>Message</span>
+                </h1>
+
+            </div>
+
+            <p class="password-gate-intro">
+                Not everything is as it seems.
+                Coming soon — this page is unlocked
+                and ready for the puzzle.
+            </p>
+
+        </header>
+
+    </section>
+
+</main>
+
+
+<script src="password-gate.js"></script>
+
+</body>
+
+</html>

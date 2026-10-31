@@ -841,7 +841,8 @@ function showCompletedGame() {
             "Riddle solved!";
 
         resultTextElement.textContent =
-            `You found the hidden word: ${answer}.`;
+            `You found the hidden word: ${answer}. Take this clue to your decoder to find the code for Riddle 02.`;
+
 
     } else {
 

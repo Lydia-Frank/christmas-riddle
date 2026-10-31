@@ -19,7 +19,10 @@
 
 <body>
 
-<main class="container maze-page">
+<main
+    class="container maze-page riddle-page"
+    data-riddle-number="3"
+>
 
     <a
         class="back-link"
@@ -29,7 +32,84 @@
     </a>
 
 
-    <header class="maze-header">
+    <!-- Password gate -->
+
+    <section
+        class="password-gate"
+        id="passwordGate"
+    >
+
+        <div class="small-title">
+            RIDDLE 03
+        </div>
+
+        <div class="password-gate-icon">
+            🔐
+        </div>
+
+        <h1>
+            Enter the
+            <span>code</span>
+        </h1>
+
+        <p class="password-gate-intro">
+            Solve the previous riddle, then use
+            your decoder to find the five-digit
+            code that unlocks this challenge.
+        </p>
+
+        <form
+            class="password-form"
+            id="passwordForm"
+        >
+
+            <label
+                class="password-label"
+                for="passwordInput"
+            >
+                Access code
+            </label>
+
+            <input
+                class="password-input"
+                id="passwordInput"
+                name="password"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="5"
+                placeholder="•••••"
+                required
+            >
+
+            <p
+                class="password-error"
+                id="passwordError"
+                role="alert"
+                hidden
+            ></p>
+
+            <button
+                class="solve-button"
+                type="submit"
+            >
+                Unlock riddle
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- Riddle content (shown after unlock) -->
+
+    <section
+        class="riddle-content"
+        id="riddleContent"
+        hidden
+    >
+
+<header class="maze-header">
 
         <div class="small-title">
             RIDDLE 03
@@ -201,9 +281,12 @@
         Reset Riddle 3 and generate a new maze
     </button>
 
+    </section>
+
 </main>
 
 
+<script src="password-gate.js"></script>
 <script src="riddle3.js"></script>
 
 </body>

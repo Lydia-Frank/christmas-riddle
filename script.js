@@ -1,3 +1,15 @@
+function isRiddleUnlocked(number) {
+
+    if (number === 1) {
+        return true;
+    }
+
+    return localStorage.getItem(
+        "riddle" + number + "Unlocked"
+    ) === "true";
+}
+
+
 function updateProgress() {
 
     let solved = 0;
@@ -10,13 +22,28 @@ function updateProgress() {
         const card =
             document.getElementById("riddle" + number);
 
+        const statusElement =
+            card.querySelector(".riddle-status");
+
+        card.classList.remove("solved", "locked");
+
         if (status === "solved") {
 
             solved++;
 
             card.classList.add("solved");
 
-            card.querySelector(".riddle-status").innerText = "✓";
+            statusElement.innerText = "✓";
+
+        } else if (!isRiddleUnlocked(number)) {
+
+            card.classList.add("locked");
+
+            statusElement.innerText = "🔒";
+
+        } else {
+
+            statusElement.innerText = "→";
         }
     }
 

@@ -1785,3 +1785,143 @@
     }
 
 }
+
+
+/* =================================
+   PASSWORD GATES (RIDDLES 2–5)
+================================= */
+
+.riddle-page {
+    padding-top: 25px;
+    max-width: 600px;
+}
+
+.password-gate {
+    text-align: center;
+
+    padding:
+        10px 0
+        20px;
+}
+
+.password-gate-icon {
+    font-size: 52px;
+
+    margin-bottom: 12px;
+}
+
+.password-gate h1 {
+    margin-bottom: 16px;
+}
+
+.password-gate-intro {
+    color: #b7c5bf;
+
+    line-height: 1.6;
+
+    max-width: 420px;
+
+    margin:
+        0 auto
+        28px;
+}
+
+.password-form {
+    max-width: 320px;
+
+    margin: 0 auto;
+
+    text-align: left;
+}
+
+.password-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d8b75f;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.password-input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    border-radius: 9px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    color: white;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    letter-spacing: 8px;
+
+    text-align: center;
+}
+
+.password-input::placeholder {
+    color: #6f8179;
+
+    letter-spacing: 8px;
+}
+
+.password-input:focus {
+    outline: none;
+
+    border-color: #d8b75f;
+}
+
+.password-error {
+    margin:
+        12px 0
+        0;
+
+    color: #f0a0a0;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    text-align: center;
+}
+
+.password-error[hidden] {
+    display: none;
+}
+
+.password-form .solve-button {
+    margin-top: 18px;
+}
+
+.riddle-content[hidden],
+.password-gate[hidden] {
+    display: none;
+}
+
+.riddle-content-header {
+    text-align: center;
+}
