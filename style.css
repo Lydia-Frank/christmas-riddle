@@ -406,6 +406,195 @@
 
 
         /* -----------------------------
+           STORY INTRO MODAL
+        ----------------------------- */
+
+        .story-briefing-button {
+            width: auto;
+
+            margin-top: 22px;
+
+            padding: 10px 18px;
+
+            background: transparent;
+
+            border:
+                1px solid
+                rgba(
+                    216,
+                    183,
+                    95,
+                    0.45
+                );
+
+            border-radius: 9px;
+
+            color: #d8b75f;
+
+            font-size: 12px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .story-modal {
+            overflow-y: auto;
+
+            padding: 24px 16px;
+        }
+
+        .story-modal-content {
+            max-width: 480px;
+
+            max-height: min(90vh, 760px);
+
+            overflow-y: auto;
+
+            padding: 28px 22px 24px;
+
+            text-align: left;
+        }
+
+        .story-modal-kicker {
+            color: #d8b75f;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+
+            text-align: center;
+        }
+
+        .story-modal-content h2 {
+            margin:
+                0 0
+                18px;
+
+            font-size: 24px;
+
+            text-align: center;
+
+            line-height: 1.25;
+        }
+
+        .story-modal-body p {
+            margin:
+                0 0
+                12px;
+
+            font-size: 14px;
+        }
+
+        .story-quote {
+            margin:
+                14px 0
+                16px;
+
+            padding:
+                14px 16px;
+
+            border-left:
+                3px solid
+                #d8b75f;
+
+            background:
+                rgba(
+                    216,
+                    183,
+                    95,
+                    0.08
+                );
+
+            color: #e8d9a8;
+
+            font-family: Georgia, serif;
+
+            font-style: italic;
+
+            line-height: 1.55;
+        }
+
+        .story-how-it-works {
+            margin:
+                18px 0
+                16px;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.04
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+        }
+
+        .story-how-title {
+            color: #d8b75f;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .story-how-it-works ul {
+            margin: 0;
+            padding-left: 0;
+
+            list-style: none;
+        }
+
+        .story-how-it-works li {
+            color: #c1cbc7;
+
+            font-size: 14px;
+
+            line-height: 1.45;
+
+            margin-bottom: 8px;
+        }
+
+        .story-how-it-works li:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-ready {
+            text-align: center;
+
+            font-weight: bold;
+
+            color: #f1e6c4 !important;
+
+            margin-top: 8px !important;
+        }
+
+        .story-start-button {
+            margin-top: 8px;
+        }
+
+
+        /* -----------------------------
            BUTTONS
         ----------------------------- */
 
@@ -2314,6 +2503,336 @@ match the photo aspect (1024×723) with no inset.
         gap: 6px;
 
         padding: 8px;
+    }
+
+}
+
+
+/* =================================
+   RIDDLE 5: CODE LOCK + FINALE
+================================= */
+
+.lock-page {
+    padding-top: 25px;
+}
+
+.lock-header {
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+.lock-title-icon {
+    font-size: 48px;
+
+    margin-bottom: 10px;
+}
+
+.lock-introduction {
+    color: #b7c5bf;
+
+    line-height: 1.6;
+
+    max-width: 480px;
+
+    margin: 0 auto;
+}
+
+.lock-panel {
+    margin: 0 auto 24px;
+
+    max-width: 430px;
+
+    padding: 24px 20px;
+
+    border-radius: 16px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.35
+        );
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
+}
+
+.lock-panel-title {
+    color: #d8b75f;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 14px;
+
+    text-align: center;
+}
+
+.lock-clues {
+    margin: 0 0 20px;
+    padding-left: 18px;
+
+    color: #c1cbc7;
+
+    line-height: 1.55;
+
+    font-size: 14px;
+}
+
+.lock-clues li {
+    margin-bottom: 10px;
+}
+
+.lock-clues li:last-child {
+    margin-bottom: 0;
+}
+
+.lock-form {
+    display: grid;
+    gap: 12px;
+}
+
+.lock-label {
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #a7b4af;
+}
+
+.lock-input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border-radius: 9px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+
+    color: white;
+
+    font-size: 22px;
+
+    letter-spacing: 8px;
+
+    text-align: center;
+}
+
+.lock-input:focus {
+    outline: none;
+
+    border-color: #d8b75f;
+}
+
+.lock-error {
+    margin: 0;
+
+    color: #f0a0a0;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+.lock-error[hidden] {
+    display: none;
+}
+
+.lock-result {
+    margin:
+        28px auto
+        0;
+
+    padding: 36px 22px 28px;
+
+    max-width: 480px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.75
+        );
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            165deg,
+            rgba(
+                216,
+                183,
+                95,
+                0.16
+            ),
+            rgba(
+                63,
+                153,
+                85,
+                0.12
+            )
+        );
+
+    text-align: center;
+
+    animation:
+        finaleReveal 0.7s ease;
+}
+
+.lock-result[hidden] {
+    display: none;
+}
+
+.lock-result-icon {
+    font-size: 52px;
+
+    line-height: 1.2;
+
+    animation:
+        finaleBounce 1.4s ease infinite;
+}
+
+.lock-result h2 {
+    margin:
+        14px 0
+        16px;
+
+    font-family: Georgia, serif;
+
+    font-size: 28px;
+
+    color: #f1e6c4;
+
+    line-height: 1.2;
+}
+
+.lock-result-body {
+    color: #d5ddd9;
+
+    line-height: 1.6;
+
+    font-size: 15px;
+
+    text-align: left;
+}
+
+.lock-result-body p {
+    margin:
+        0 0
+        12px;
+}
+
+.lock-click {
+    text-align: center !important;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px !important;
+
+    letter-spacing: 4px;
+
+    color: #d8b75f !important;
+}
+
+.lock-saved-list {
+    margin: 12px 0 16px;
+    padding-left: 0;
+
+    list-style: none;
+
+    text-align: center;
+
+    color: #e8d9a8;
+}
+
+.lock-saved-list li {
+    margin-bottom: 6px;
+}
+
+.lock-mission-done {
+    margin-top: 18px !important;
+
+    text-align: center !important;
+
+    font-family: Georgia, serif;
+
+    font-size: 20px !important;
+
+    letter-spacing: 2px;
+
+    color: #f1e6c4 !important;
+}
+
+.lock-score {
+    text-align: center !important;
+
+    font-weight: bold;
+
+    color: #d8b75f !important;
+}
+
+.lock-farewell {
+    text-align: center !important;
+
+    font-style: italic;
+
+    color: #c9d4cf !important;
+}
+
+@keyframes finaleReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+@keyframes finaleBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
     }
 
 }

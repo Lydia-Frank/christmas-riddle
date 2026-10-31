@@ -1092,7 +1092,7 @@ function completePuzzle() {
     clearSelection();
     renderAll();
     showSolvedUi(
-        "🎄 Picture complete!"
+        "✅ Entrance found!"
     );
 
 }
@@ -1101,7 +1101,14 @@ function completePuzzle() {
 function showSolvedUi(message) {
 
     resultTextElement.textContent =
-        "You put the Christmas scene back together.";
+        "There it is! " +
+        "Hidden in the winter landscape is an entrance " +
+        "you hadn't noticed before. " +
+        "You rush through the snow and open the outer door. " +
+        "Inside, you hear a faint voice... " +
+        "\"HELP! I'M IN HERE!\" " +
+        "It's Nisseline! " +
+        "But there is one final obstacle between you and her.";
 
     resultElement.hidden = false;
 
@@ -1128,7 +1135,7 @@ function restoreSolvedState() {
     renderAll();
 
     showSolvedUi(
-        "✓ Riddle 4 completed"
+        "✓ Entrance found"
     );
 
 }

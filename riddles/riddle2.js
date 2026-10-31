@@ -1241,7 +1241,7 @@ function completeCrossword() {
 
 
     showMessage(
-        "🎄 Correct!"
+        "✅ Clues decoded!"
     );
 
 

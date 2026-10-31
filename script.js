@@ -51,7 +51,7 @@ function updateProgress() {
     // Update progress text
 
     document.getElementById("progressText").innerText =
-        solved + " / 5 SOLVED";
+        solved + " / 5 COMPLETE";
 
 
     // Update progress bar
@@ -62,22 +62,112 @@ function updateProgress() {
         percentage + "%";
 
 
-    // Unlock final challenge
+    // Unlock final mission status
+
+    const vault =
+        document.getElementById("vault");
+
+    const vaultIcon =
+        document.getElementById("vaultIcon");
+
+    const vaultHeading =
+        document.getElementById("vaultHeading");
+
+    const vaultText =
+        document.getElementById("vaultText");
 
     if (solved === 5) {
 
-        document
-            .getElementById("vault")
-            .classList.add("unlocked");
+        vault.classList.add("unlocked");
 
-        document
-            .getElementById("vaultIcon")
-            .innerText = "🔓";
+        vaultIcon.innerText = "🏆";
 
-        document
-            .getElementById("vaultText")
-            .innerText =
-            "All riddles solved. The final challenge is unlocked!";
+        vaultHeading.innerText =
+            "MISSION ACCOMPLISHED";
+
+        vaultText.innerText =
+            "You saved Nisseline — and Christmas! " +
+            "She will never forget what you did.";
+
+    } else {
+
+        vault.classList.remove("unlocked");
+
+        vaultIcon.innerText = "🔐";
+
+        vaultHeading.innerText =
+            "Nisseline is still missing";
+
+        vaultText.innerText =
+            "Complete all five challenges " +
+            "to free Nisseline and save Christmas.";
+    }
+}
+
+
+/* --------------------------------
+   OPENING STORY POP-UP
+-------------------------------- */
+
+const INTRO_SEEN_KEY = "nisselineIntroSeen";
+
+const storyIntroModal =
+    document.getElementById("storyIntroModal");
+
+const startRescueButton =
+    document.getElementById("startRescueMission");
+
+const openStoryBriefingButton =
+    document.getElementById("openStoryBriefing");
+
+
+function showStoryIntro() {
+
+    if (!storyIntroModal) {
+        return;
+    }
+
+    storyIntroModal.classList.add("visible");
+}
+
+
+function hideStoryIntro() {
+
+    if (!storyIntroModal) {
+        return;
+    }
+
+    storyIntroModal.classList.remove("visible");
+
+    localStorage.setItem(
+        INTRO_SEEN_KEY,
+        "true"
+    );
+}
+
+
+function initStoryIntro() {
+
+    if (!storyIntroModal) {
+        return;
+    }
+
+    if (localStorage.getItem(INTRO_SEEN_KEY) !== "true") {
+        showStoryIntro();
+    }
+
+    if (startRescueButton) {
+        startRescueButton.addEventListener(
+            "click",
+            hideStoryIntro
+        );
+    }
+
+    if (openStoryBriefingButton) {
+        openStoryBriefingButton.addEventListener(
+            "click",
+            showStoryIntro
+        );
     }
 }
 
@@ -85,3 +175,4 @@ function updateProgress() {
 // Run whenever homepage loads
 
 updateProgress();
+initStoryIntro();

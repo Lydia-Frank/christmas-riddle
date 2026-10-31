@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Riddle 5 - The Final Evidence</title>
+    <title>Final Mission - Break Nisseline Free</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
 <body>
 
 <main
-    class="container riddle-page"
+    class="container lock-page riddle-page"
     data-riddle-number="5"
 >
 
@@ -28,7 +28,7 @@
         class="back-link"
         href="../index.html"
     >
-        ← Back to riddles
+        ← Back to mission
     </a>
 
 
@@ -40,7 +40,7 @@
     >
 
         <div class="small-title">
-            RIDDLE 05
+            FINAL MISSION
         </div>
 
         <div class="password-gate-icon">
@@ -53,9 +53,9 @@
         </h1>
 
         <p class="password-gate-intro">
-            Solve the previous riddle, then use
-            your decoder to find the five-digit
-            code that unlocks this challenge.
+            The entrance is open. Use the code from
+            your decoder to reach Nisseline's cell
+            and crack the final lock.
         </p>
 
         <form
@@ -93,7 +93,7 @@
                 class="solve-button"
                 type="submit"
             >
-                Unlock riddle
+                Unlock mission
             </button>
 
         </form>
@@ -109,32 +109,198 @@
         hidden
     >
 
-        <header class="riddle-content-header">
+        <header class="lock-header">
 
             <div class="small-title">
-                RIDDLE 05
+                FINAL MISSION · CRACK THE LOCK 🔐
             </div>
 
-            <div class="wordle-title-row">
-
-                <span class="wordle-title-icon">
-                    🎁
-                </span>
-
-                <h1>
-                    The Final
-                    <span>Evidence</span>
-                </h1>
-
+            <div class="lock-title-icon">
+                🔐
             </div>
 
-            <p class="password-gate-intro">
-                Recover the last piece of the code.
-                Coming soon — this page is unlocked
-                and ready for the puzzle.
+            <h1>
+                Break Nisseline
+                <span>Free</span>
+            </h1>
+
+            <p class="lock-introduction">
+                You've found her.
+                Nisseline is locked inside a cell secured
+                by an electronic combination lock.
+                <br><br>
+                The kidnapper is nowhere to be seen, but
+                they left behind several cryptic clues to
+                the combination.
+                <br><br>
+                This is your final challenge.
+                Study the clues. Crack the code. Open the lock.
+                Nisseline's freedom, and Christmas, depends on you.
             </p>
 
         </header>
+
+
+        <section
+            class="lock-panel"
+            id="lockPanel"
+        >
+
+            <div class="lock-panel-title">
+                Electronic lock
+            </div>
+
+            <ol class="lock-clues">
+                <li>
+                    “Twelve long months we wait for one
+                    enchanted night…”
+                </li>
+                <li>
+                    When the stockings are found filled,
+                    what day has dawned?
+                </li>
+                <li>
+                    Write the month first, then the day —
+                    that is the order of the lock.
+                </li>
+                <li>
+                    Four digits. No letters. Christmas
+                    itself is the key.
+                </li>
+            </ol>
+
+            <form
+                class="lock-form"
+                id="lockForm"
+            >
+
+                <label
+                    class="lock-label"
+                    for="lockCodeInput"
+                >
+                    Combination
+                </label>
+
+                <input
+                    class="lock-input"
+                    id="lockCodeInput"
+                    name="lockCode"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="4"
+                    placeholder="••••"
+                    required
+                >
+
+                <p
+                    class="lock-error"
+                    id="lockError"
+                    role="alert"
+                    hidden
+                ></p>
+
+                <button
+                    class="solve-button"
+                    type="submit"
+                >
+                    CRACK THE LOCK
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- FINALE -->
+
+        <section
+            class="lock-result"
+            id="lockResult"
+            hidden
+        >
+
+            <div class="lock-result-icon">
+                🎄
+            </div>
+
+            <h2>
+                YOU SAVED NISSELINE!
+            </h2>
+
+            <div class="lock-result-body">
+
+                <p class="lock-click">
+                    CLICK.
+                </p>
+
+                <p>
+                    The lock opens.
+                </p>
+
+                <p>
+                    The door slowly swings open and
+                    Nisseline runs out.
+                </p>
+
+                <p>
+                    She's free!
+                </p>
+
+                <p>
+                    Thanks to your communication skills,
+                    knowledge, navigation, puzzle-solving
+                    and logic, you tracked down the hideout
+                    and rescued Nisseline.
+                </p>
+
+                <p>
+                    Santa has already received the good news.
+                </p>
+
+                <ul class="lock-saved-list">
+                    <li>The sleigh is being loaded.</li>
+                    <li>The reindeer are ready.</li>
+                    <li>The presents are packed.</li>
+                </ul>
+
+                <p>
+                    CHRISTMAS IS SAVED! 🎅🎁
+                </p>
+
+                <p class="lock-mission-done">
+                    MISSION ACCOMPLISHED
+                </p>
+
+                <p class="lock-score">
+                    🏆 5 / 5 challenges completed
+                </p>
+
+                <p class="lock-farewell">
+                    Nisseline will never forget what you did.
+                </p>
+
+            </div>
+
+            <a
+                class="wordle-return-button"
+                href="../index.html"
+            >
+                RETURN TO MISSION HQ
+            </a>
+
+        </section>
+
+
+        <!-- DEVELOPMENT RESET -->
+
+        <button
+            class="wordle-reset-button"
+            id="resetLock"
+            type="button"
+        >
+            Reset Final Mission
+        </button>
 
     </section>
 
@@ -142,6 +308,7 @@
 
 
 <script src="password-gate.js"></script>
+<script src="riddle5.js"></script>
 
 </body>
 

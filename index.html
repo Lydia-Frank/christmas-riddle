@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>The Missing Christmas Stamp</title>
-    
+    <title>Save Nisseline</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -30,24 +30,29 @@
         </div>
 
         <h1>
-            The Missing
+            Save
             <br>
-            <span>Christmas Stamp</span>
+            <span>Nisseline</span>
         </h1>
 
         <p class="intro">
 
-            The secret Christmas Stamp has disappeared.
+            One of Santa’s most trusted nisser has been kidnapped.
 
             <br><br>
 
-            Five challenges stand between you
-            and its hiding place.
-
-            Each solved riddle gives you a clue for
-            the decoder — use it to unlock the next code.
+            Complete five challenges to find her hideout,
+            crack the lock, and save Christmas.
 
         </p>
+
+        <button
+            class="story-briefing-button"
+            id="openStoryBriefing"
+            type="button"
+        >
+            Read the mission briefing
+        </button>
 
     </section>
 
@@ -60,11 +65,11 @@
         <div class="progress-top">
 
             <span>
-                YOUR PROGRESS
+                RESCUE PROGRESS
             </span>
 
             <span id="progressText">
-                0 / 5 SOLVED
+                0 / 5 COMPLETE
             </span>
 
         </div>
@@ -82,7 +87,7 @@
 
 
 
-    <!-- RIDDLES -->
+    <!-- CHALLENGES -->
 
     <section class="riddles">
 
@@ -93,21 +98,21 @@
             onclick="location.href='riddles/riddle1.html'">
 
             <div class="riddle-icon">
-                🔤
+                💬
             </div>
 
             <div class="riddle-info">
 
                 <div class="riddle-number">
-                    RIDDLE 01
+                    MISSION 01 · NEGOTIATE
                 </div>
 
                 <h2>
-                    Christmas Word
+                    Establish Contact
                 </h2>
 
                 <p>
-                    Crack the hidden word.
+                    Speak the kidnapper’s language.
                 </p>
 
             </div>
@@ -126,21 +131,21 @@
             onclick="location.href='riddles/riddle2.html'">
 
             <div class="riddle-icon">
-                🧩
+                🕵️
             </div>
 
             <div class="riddle-info">
 
                 <div class="riddle-number">
-                    RIDDLE 02
+                    MISSION 02 · GATHER INTELLIGENCE
                 </div>
 
                 <h2>
-                    The Crossword
+                    Decode the Clues
                 </h2>
 
                 <p>
-                    Complete the Christmas crossword.
+                    Uncover where Nisseline is held.
                 </p>
 
             </div>
@@ -159,21 +164,21 @@
             onclick="location.href='riddles/riddle3.html'">
 
             <div class="riddle-icon">
-                🧠
+                🧭
             </div>
 
             <div class="riddle-info">
 
                 <div class="riddle-number">
-                    RIDDLE 03
+                    MISSION 03 · FIND NISSELINE
                 </div>
 
                 <h2>
-                    Christmas Logic
+                    Find the Hideout
                 </h2>
 
                 <p>
-                    Can you work out what happened?
+                    Navigate the snowstorm maze.
                 </p>
 
             </div>
@@ -198,15 +203,15 @@
             <div class="riddle-info">
 
                 <div class="riddle-number">
-                    RIDDLE 04
+                    MISSION 04 · RECONSTRUCT
                 </div>
 
                 <h2>
-                    The Picture Puzzle
+                    Reconstruct the Evidence
                 </h2>
 
                 <p>
-                    Put the Christmas scene back together.
+                    Reveal the hidden entrance.
                 </p>
 
             </div>
@@ -225,21 +230,21 @@
             onclick="location.href='riddles/riddle5.html'">
 
             <div class="riddle-icon">
-                🎁
+                🔐
             </div>
 
             <div class="riddle-info">
 
                 <div class="riddle-number">
-                    RIDDLE 05
+                    FINAL MISSION · CRACK THE LOCK
                 </div>
 
                 <h2>
-                    The Final Evidence
+                    Break Nisseline Free
                 </h2>
 
                 <p>
-                    Recover the last piece of the code.
+                    Open the electronic lock.
                 </p>
 
             </div>
@@ -255,7 +260,7 @@
 
 
 
-    <!-- FINAL VAULT -->
+    <!-- MISSION STATUS -->
 
     <section
         class="vault"
@@ -272,17 +277,17 @@
         <div>
 
             <div class="riddle-number">
-                FINAL CHALLENGE
+                MISSION STATUS
             </div>
 
-            <h2>
-                The Secret Location
+            <h2 id="vaultHeading">
+                Nisseline is still missing
             </h2>
 
             <p id="vaultText">
 
-                Complete all five riddles
-                to unlock the final clue.
+                Complete all five challenges
+                to free Nisseline and save Christmas.
 
             </p>
 
@@ -293,56 +298,94 @@
 
 </div>
 
-<!-- WORDLE RIDDLE -->
+
+<!-- OPENING STORY POP-UP -->
 
 <div
-    class="modal"
-    id="wordleModal">
+    class="modal story-modal"
+    id="storyIntroModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="storyIntroTitle"
+>
 
-    <div class="modal-content">
+    <div class="modal-content story-modal-content">
 
-        <div class="riddle-number">
-            RIDDLE 01
+        <div class="story-modal-kicker">
+            🎄 Main story: Save Nisseline!
         </div>
 
-        <h2>
-            🔤 Christmas Word
+        <h2 id="storyIntroTitle">
+            🚨 CHRISTMAS EMERGENCY 🚨
         </h2>
 
-        <p>
-            Guess the hidden five-letter word.
-            You have six attempts.
-        </p>
+        <div class="story-modal-body">
 
+            <p>
+                Disaster has struck the North Pole.
+            </p>
 
-        <div class="wordle-container">
+            <p>
+                Nisseline, one of Santa’s most trusted nisser,
+                has been kidnapped! She was investigating some
+                very suspicious activity when she suddenly
+                disappeared without a trace.
+            </p>
 
-            <div
-                class="wordle-grid"
-                id="wordleGrid">
+            <p>
+                Santa has received a mysterious message from
+                the kidnapper:
+            </p>
+
+            <blockquote class="story-quote">
+                “If you ever want to see Nisseline again,
+                you'll have to prove you're clever enough
+                to find her.”
+            </blockquote>
+
+            <p>
+                Christmas is getting closer, and without
+                Nisseline, Santa's operation is falling apart.
+            </p>
+
+            <p>
+                We need your help.
+            </p>
+
+            <p>
+                To rescue Nisseline, you must complete
+                5 challenges. Each one will bring you one
+                step closer to finding her and unlocking
+                the place where she is being held.
+            </p>
+
+            <div class="story-how-it-works">
+
+                <div class="story-how-title">
+                    How it works
+                </div>
+
+                <ul>
+                    <li>🎯 Complete all 5 challenges</li>
+                    <li>🎅 Each challenge is one step in the rescue</li>
+                    <li>✅ Your progress will be saved as you go</li>
+                    <li>🏆 Free Nisseline and SAVE CHRISTMAS!</li>
+                </ul>
+
             </div>
 
-
-            <div
-                class="wordle-message"
-                id="wordleMessage">
-            </div>
-
-
-            <div
-                class="keyboard"
-                id="keyboard">
-            </div>
+            <p class="story-ready">
+                Are you ready?
+            </p>
 
         </div>
 
-
         <button
-            class="back-button"
-            onclick="closeWordle()">
-
-            ← BACK
-
+            class="solve-button story-start-button"
+            id="startRescueMission"
+            type="button"
+        >
+            START THE RESCUE MISSION
         </button>
 
     </div>

@@ -792,7 +792,7 @@ function winGame() {
         "solved"
     );
 
-    showMessage("🎄 Correct!");
+    showMessage("✅ Contact established!");
 
     showCompletedGame();
 }
@@ -835,13 +835,27 @@ function showCompletedGame() {
 
     keyboardElement.hidden = true;
 
+    const continueButton =
+        document.getElementById("resultContinue");
+
     if (gameWon) {
 
         resultTitleElement.textContent =
-            "Riddle solved!";
+            "✅ CONTACT ESTABLISHED";
 
         resultTextElement.textContent =
-            `You found the hidden word: ${answer}. Take this clue to your decoder to find the code for Riddle 02.`;
+            "It worked! The kidnapper has responded. " +
+            "They've left behind a strange set of clues. " +
+            "Perhaps solving them will reveal where " +
+            "Nisseline has been taken... " +
+            `(Secret word: ${answer} — take it to your decoder for the next code.)`;
+
+        if (continueButton) {
+            continueButton.hidden = false;
+            continueButton.textContent =
+                "CONTINUE THE RESCUE";
+            continueButton.href = "riddle2.html";
+        }
 
 
     } else {
@@ -851,6 +865,10 @@ function showCompletedGame() {
 
         resultTextElement.textContent =
             `The hidden word was ${answer}. Use the reset button to try a new word.`;
+
+        if (continueButton) {
+            continueButton.hidden = true;
+        }
     }
 }
 

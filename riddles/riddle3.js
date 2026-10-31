@@ -904,7 +904,7 @@ function drawNisse(cellSize) {
 function drawSanta(cellSize) {
 
     drawEmoji(
-        "🎅",
+        "🏠",
         santa.row,
         santa.col,
         cellSize
@@ -1090,13 +1090,18 @@ function completeMaze() {
 
 
     showMessage(
-        "🎄 Santa found!"
+        "✅ Hideout located!"
     );
 
 
     resultTextElement
         .textContent =
-        `The nisse reached Santa in ${moves} moves.`;
+        "You made it through the storm! " +
+        "In the distance, you can see a small building " +
+        "hidden in the snow. This must be where they're " +
+        "keeping Nisseline. But something is wrong... " +
+        "We still don't know exactly how to get inside. " +
+        `(Reached in ${moves} moves.)`;
 
 
     resultElement.hidden =
@@ -1129,7 +1134,12 @@ function restoreSolvedState() {
 
     resultTextElement
         .textContent =
-        `The nisse reached Santa in ${moves} moves.`;
+        "You made it through the storm! " +
+        "In the distance, you can see a small building " +
+        "hidden in the snow. This must be where they're " +
+        "keeping Nisseline. But something is wrong... " +
+        "We still don't know exactly how to get inside. " +
+        `(Reached in ${moves} moves.)`;
 
 
     resultElement.hidden =
@@ -1145,7 +1155,7 @@ function restoreSolvedState() {
 
 
     showMessage(
-        "✓ Riddle 3 completed"
+        "✓ Hideout located"
     );
 
 }
@@ -1197,7 +1207,7 @@ function showMessage(message) {
 function clearMessage() {
 
     messageElement.textContent =
-        "Help 🧝 reach 🎅";
+        "Help 🧝 reach the hideout 🏠";
 
 }
 
