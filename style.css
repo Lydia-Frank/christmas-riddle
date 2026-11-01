@@ -2593,10 +2593,61 @@ match the photo aspect (1024×723) with no inset.
     margin: 0 auto;
 }
 
+.lock-mission-figure,
+.lock-clue-figure,
+.lock-success-figure {
+    margin: 22px auto 0;
+
+    max-width: 480px;
+}
+
+.lock-mission-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 12px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.35
+        );
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+}
+
+.lock-clue-images {
+    display: grid;
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.lock-clue-figure {
+    margin: 0;
+}
+
+.lock-success-figure {
+    margin:
+        0 auto
+        18px;
+}
+
 .lock-panel {
     margin: 0 auto 24px;
 
-    max-width: 430px;
+    max-width: 480px;
 
     padding: 24px 20px;
 

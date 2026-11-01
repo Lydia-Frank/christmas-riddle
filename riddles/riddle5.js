@@ -4,11 +4,11 @@
 /*
 Final mission: electronic combination lock.
 
-Clues resolve to December 25 → combination 1225.
+Decoder pages resolve to combination 675.
 */
 
 
-const LOCK_CODE = "1225";
+const LOCK_CODE = "675";
 
 const STORAGE_KEYS = {
     solved: "lockRiddle5Solved"
