@@ -3,100 +3,243 @@
 
 /* =================================
    CROSSWORD DATA
-================================= */
-
-/*
+=================================
 
 Coordinates start at 0.
 
 row = vertical position
 col = horizontal position
 
+id uniquely identifies a word when
+across and down share a clue number.
 */
 
 const WORDS = [
 
     {
+        id: "1-down",
         number: 1,
-        answer: "ADVERT",
+        answer: "CARD",
         clue:
-            "WPP makes money from this. Only one letter distinguishes it from Sundays in December.",
+            "Sent with season greetings.",
         row: 0,
-        col: 5,
+        col: 8,
         direction: "down"
     },
 
     {
+        id: "2-across",
         number: 2,
-        answer: "MEDIA",
+        answer: "SANTACLAUS",
         clue:
-            "The industry you work in.",
+            "The man in red who delivers presents.",
         row: 1,
-        col: 3,
+        col: 1,
+        direction: "across"
+    },
+
+    {
+        id: "2-down",
+        number: 2,
+        answer: "SLEIGH",
+        clue:
+            "Pulled by reindeer.",
+        row: 1,
+        col: 1,
         direction: "down"
     },
 
     {
+        id: "3-down",
         number: 3,
         answer: "TREE",
         clue:
             "Often decorated with a star.",
-        row: 2,
-        col: 0,
-        direction: "across"
-    },
-
-    {
-        number: 4,
-        answer: "CAMPAIGN",
-        clue:
-            "A series of media activities, often accompanied by a promotion.",
-        row: 4,
-        col: 9,
-        direction: "down"
-    },
-
-    {
-        number: 5,
-        answer: "SANTACLAUS",
-        clue:
-            "The man in red who delivers presents.",
-        row: 5,
-        col: 2,
-        direction: "across"
-    },
-
-    {
-        number: 6,
-        answer: "NISSE",
-        clue:
-            "A small mythical creature associated with Christmas and fond of rice pudding.",
-        row: 5,
+        row: 1,
         col: 4,
         direction: "down"
     },
 
     {
-        number: 7,
-        answer: "DATA",
+        id: "4-down",
+        number: 4,
+        answer: "CAMPAIGN",
         clue:
-            "Per Jensen works with this and modelling.",
-        row: 8,
-        col: 8,
+            "A series of media activities, often accompanied by a promotion.",
+        row: 1,
+        col: 6,
+        direction: "down"
+    },
+
+    {
+        id: "5-down",
+        number: 5,
+        answer: "STAR",
+        clue:
+            "Sits on top of the tree.",
+        row: 1,
+        col: 10,
+        direction: "down"
+    },
+
+    {
+        id: "6-across",
+        number: 6,
+        answer: "TV",
+        clue:
+            "Linear screen channel (abbr.).",
+        row: 2,
+        col: 10,
         direction: "across"
     },
 
     {
+        id: "7-across",
+        number: 7,
+        answer: "MEDIA",
+        clue:
+            "The industry you work in.",
+        row: 3,
+        col: 6,
+        direction: "across"
+    },
+
+    {
+        id: "8-across",
         number: 8,
+        answer: "NISSE",
+        clue:
+            "A small mythical creature associated with Christmas and fond of rice pudding.",
+        row: 4,
+        col: 0,
+        direction: "across"
+    },
+
+    {
+        id: "9-down",
+        number: 9,
+        answer: "ADVERT",
+        clue:
+            "WPP makes money from this. Only one letter distinguishes it from Sundays in December.",
+        row: 5,
+        col: 8,
+        direction: "down"
+    },
+
+    {
+        id: "10-down",
+        number: 10,
+        answer: "BRAND",
+        clue:
+            "A name and identity customers recognise.",
+        row: 5,
+        col: 11,
+        direction: "down"
+    },
+
+    {
+        id: "11-across",
+        number: 11,
+        answer: "REINDEER",
+        clue:
+            "Santa's team animal.",
+        row: 6,
+        col: 4,
+        direction: "across"
+    },
+
+    {
+        id: "12-down",
+        number: 12,
+        answer: "VIDEO",
+        clue:
+            "Moving-image ad format.",
+        row: 7,
+        col: 2,
+        direction: "down"
+    },
+
+    {
+        id: "13-across",
+        number: 13,
+        answer: "ROI",
+        clue:
+            "Return on investment (abbr.).",
+        row: 8,
+        col: 0,
+        direction: "across"
+    },
+
+    {
+        id: "14-across",
+        number: 14,
+        answer: "GINGER",
+        clue:
+            "___ bread house.",
+        row: 8,
+        col: 4,
+        direction: "across"
+    },
+
+    {
+        id: "14-down",
+        number: 14,
         answer: "GIFT",
         clue:
             "Lies under the tree.",
+        row: 8,
+        col: 4,
+        direction: "down"
+    },
+
+    {
+        id: "15-across",
+        number: 15,
+        answer: "AD",
+        clue:
+            "Short for advertisement.",
+        row: 9,
+        col: 10,
+        direction: "across"
+    },
+
+    {
+        id: "16-across",
+        number: 16,
+        answer: "ELF",
+        clue:
+            "Santa's little helper.",
         row: 10,
-        col: 9,
+        col: 2,
+        direction: "across"
+    },
+
+    {
+        id: "17-across",
+        number: 17,
+        answer: "DATA",
+        clue:
+            "Per Jensen works with this and modelling.",
+        row: 10,
+        col: 6,
         direction: "across"
     }
 
 ];
+
+
+/*
+Circled hint cells (1-6) spell ORANGE.
+Keys are "row-col" (0-based).
+*/
+const CIRCLE_HINTS = {
+    "8-1": 1,
+    "6-11": 2,
+    "1-8": 3,
+    "8-6": 4,
+    "8-4": 5,
+    "4-4": 6
+};
 
 
 /* =================================
@@ -104,7 +247,7 @@ const WORDS = [
 ================================= */
 
 const ROWS = 12;
-const COLS = 14;
+const COLS = 12;
 
 
 /* =================================
@@ -208,9 +351,13 @@ function buildCellData() {
 
                     letter: letter,
 
-                    wordNumbers: [],
+                    wordIds: [],
 
-                    startNumbers: []
+                    startNumber: null,
+
+                    circleNumber:
+                        CIRCLE_HINTS[key] ||
+                        null
 
                 };
 
@@ -238,15 +385,15 @@ function buildCellData() {
 
 
             cells[key]
-                .wordNumbers
-                .push(word.number);
+                .wordIds
+                .push(word.id);
 
 
             if (index === 0) {
 
                 cells[key]
-                    .startNumbers
-                    .push(word.number);
+                    .startNumber =
+                        word.number;
 
             }
 
@@ -321,12 +468,20 @@ function createGrid() {
                 key;
 
 
-            /* NUMBER */
+            if (cells[key].circleNumber) {
+
+                cell.classList.add(
+                    "crossword-circle-cell"
+                );
+
+            }
+
+
+            /* CLUE NUMBER */
 
             if (
-                cells[key]
-                    .startNumbers
-                    .length > 0
+                cells[key].startNumber !==
+                null
             ) {
 
                 const number =
@@ -339,10 +494,33 @@ function createGrid() {
 
                 number.textContent =
                     cells[key]
-                        .startNumbers[0];
+                        .startNumber;
 
                 cell.appendChild(
                     number
+                );
+
+            }
+
+
+            /* CIRCLED HINT MARKER */
+
+            if (cells[key].circleNumber) {
+
+                const circle =
+                    document.createElement(
+                        "span"
+                    );
+
+                circle.className =
+                    "crossword-circle-marker";
+
+                circle.textContent =
+                    cells[key]
+                        .circleNumber;
+
+                cell.appendChild(
+                    circle
                 );
 
             }
@@ -449,7 +627,7 @@ function createClues() {
             "crossword-clue";
 
         clue.dataset.word =
-            word.number;
+            word.id;
 
 
         clue.innerHTML =
@@ -462,7 +640,7 @@ function createClues() {
             () => {
 
                 selectWord(
-                    word.number
+                    word.id
                 );
 
             }
@@ -494,12 +672,12 @@ function createClues() {
    SELECT A WORD
 ================================= */
 
-function selectWord(number) {
+function selectWord(id) {
 
     activeWord =
         WORDS.find(
             word =>
-                word.number === number
+                word.id === id
         );
 
 
@@ -545,7 +723,7 @@ function selectWord(number) {
 
     const clue =
         document.querySelector(
-            `.crossword-clue[data-word="${number}"]`
+            `.crossword-clue[data-word="${id}"]`
         );
 
 
@@ -632,8 +810,8 @@ function chooseWordFromCell(key) {
 
     if (
         activeWord &&
-        cell.wordNumbers.includes(
-            activeWord.number
+        cell.wordIds.includes(
+            activeWord.id
         )
     ) {
 
@@ -650,7 +828,7 @@ function chooseWordFromCell(key) {
     */
 
     selectWord(
-        cell.wordNumbers[0]
+        cell.wordIds[0]
     );
 
 }
@@ -695,7 +873,7 @@ function highlightActiveWord() {
 
     const clue =
         document.querySelector(
-            `.crossword-clue[data-word="${activeWord.number}"]`
+            `.crossword-clue[data-word="${activeWord.id}"]`
         );
 
 
@@ -850,6 +1028,9 @@ function handleLetterInput(event) {
 
 /* =================================
    NEXT CELL
+
+   Skip ahead to the next empty
+   square in the active word.
 ================================= */
 
 function moveToNextSquare(
@@ -882,22 +1063,27 @@ function moveToNextSquare(
     }
 
 
-    if (
-        currentIndex <
-        wordCells.length - 1
+    for (
+        let index =
+            currentIndex + 1;
+        index < wordCells.length;
+        index++
     ) {
 
         const nextInput =
             getInput(
-                wordCells[
-                    currentIndex + 1
-                ].key
+                wordCells[index].key
             );
 
 
-        if (nextInput) {
+        if (
+            nextInput &&
+            !nextInput.value
+        ) {
 
             nextInput.focus();
+
+            return;
 
         }
 
@@ -1387,7 +1573,7 @@ function initialiseCrossword() {
 
     if (!solved) {
 
-        selectWord(1);
+        selectWord("1-down");
 
     }
 
@@ -1395,5 +1581,3 @@ function initialiseCrossword() {
 
 
 initialiseCrossword();
-
-    

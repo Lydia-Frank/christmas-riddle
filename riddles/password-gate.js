@@ -17,6 +17,12 @@ const PLACEHOLDER_PASSWORD = "00000";
 
 const RIDDLE4_PASSWORD = "31642";
 
+/*
+Mission 3 unlock: code from Mission 2
+crossword + decoder (5 digits).
+*/
+const RIDDLE3_PASSWORD = "81726";
+
 const WORDLE_ANSWER_KEY = "wordleRiddle1Answer";
 
 
@@ -65,6 +71,10 @@ function getRequiredPassword(riddleNumber) {
 
     if (riddleNumber === 2) {
         return getWordleUnlockCode();
+    }
+
+    if (riddleNumber === 3) {
+        return RIDDLE3_PASSWORD;
     }
 
     if (riddleNumber === 4) {
