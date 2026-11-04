@@ -1538,9 +1538,9 @@
 .clue-reveal-button {
     flex-shrink: 0;
 
-    margin-top: 4px;
+    margin-top: 12px;
 
-    padding: 2px 5px;
+    padding: 0 3px;
 
     border:
         1px solid
@@ -1548,19 +1548,21 @@
             216,
             183,
             95,
-            0.22
+            0.18
         );
 
-    border-radius: 4px;
+    border-radius: 2px;
 
     background: transparent;
 
     color: #d8b75f;
 
-    font-size: 9px;
+    font-size: 7px;
     font-weight: 600;
 
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+
+    line-height: 1.35;
 
     text-transform: uppercase;
 
@@ -1568,7 +1570,7 @@
 
     white-space: nowrap;
 
-    opacity: 0.85;
+    opacity: 0.75;
 }
 
 .clue-reveal-button:hover:not(:disabled) {
