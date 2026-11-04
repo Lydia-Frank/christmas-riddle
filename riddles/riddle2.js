@@ -615,6 +615,15 @@ function createClues() {
 
     WORDS.forEach(word => {
 
+        const row =
+            document.createElement(
+                "div"
+            );
+
+        row.className =
+            "crossword-clue-row";
+
+
         const clue =
             document.createElement(
                 "button"
@@ -647,23 +656,190 @@ function createClues() {
         );
 
 
+        const revealButton =
+            document.createElement(
+                "button"
+            );
+
+        revealButton.type = "button";
+
+        revealButton.className =
+            "clue-reveal-button";
+
+        revealButton.dataset.word =
+            word.id;
+
+        revealButton.textContent =
+            "Reveal";
+
+        revealButton.setAttribute(
+            "aria-label",
+            "Reveal answer for " +
+            word.number +
+            " " +
+            word.direction
+        );
+
+
+        revealButton.addEventListener(
+            "click",
+            (event) => {
+
+                event.stopPropagation();
+
+                revealWord(word.id);
+
+            }
+        );
+
+
+        row.appendChild(clue);
+        row.appendChild(revealButton);
+
+
         if (
             word.direction === "across"
         ) {
 
             acrossElement
-                .appendChild(clue);
+                .appendChild(row);
 
         }
 
         else {
 
             downElement
-                .appendChild(clue);
+                .appendChild(row);
 
         }
 
     });
+
+}
+
+
+/* =================================
+   REVEAL ONE WORD
+================================= */
+
+function revealWord(id) {
+
+    if (solved) {
+        return;
+    }
+
+
+    const word =
+        WORDS.find(
+            entry =>
+                entry.id === id
+        );
+
+
+    if (!word) {
+        return;
+    }
+
+
+    const wordCells =
+        getWordCells(word);
+
+
+    wordCells.forEach(
+        cell => {
+
+            const input =
+                getInput(cell.key);
+
+
+            if (!input) {
+                return;
+            }
+
+
+            input.value =
+                word.answer[cell.index];
+
+        }
+    );
+
+
+    saveProgress();
+
+
+    const clue =
+        document.querySelector(
+            `.crossword-clue[data-word="${id}"]`
+        );
+
+
+    if (clue) {
+
+        clue.classList.add(
+            "revealed"
+        );
+
+
+        if (
+            !clue.querySelector(
+                ".clue-reveal-answer"
+            )
+        ) {
+
+            const answer =
+                document.createElement(
+                    "span"
+                );
+
+            answer.className =
+                "clue-reveal-answer";
+
+            answer.textContent =
+                word.answer;
+
+            clue.appendChild(answer);
+
+        }
+
+    }
+
+
+    const revealButton =
+        document.querySelector(
+            `.clue-reveal-button[data-word="${id}"]`
+        );
+
+
+    if (revealButton) {
+
+        revealButton.textContent =
+            "Revealed";
+
+        revealButton.disabled = true;
+
+    }
+
+
+    selectWord(id);
+
+    clearMessage();
+
+}
+
+
+function markAllRevealsDisabled() {
+
+    document
+        .querySelectorAll(
+            ".clue-reveal-button"
+        )
+        .forEach(button => {
+
+            button.disabled = true;
+            button.textContent =
+                "Revealed";
+
+        });
 
 }
 
@@ -1439,6 +1615,9 @@ function completeCrossword() {
         true;
 
 
+    markAllRevealsDisabled();
+
+
     /*
     Lock completed crossword.
     */
@@ -1473,6 +1652,9 @@ function restoreSolvedState() {
 
     checkButton.hidden =
         true;
+
+
+    markAllRevealsDisabled();
 
 
     document

@@ -1462,10 +1462,22 @@
 
 /* CLUE BUTTON */
 
+.crossword-clue-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 6px;
+
+    margin-bottom: 2px;
+}
+
 .crossword-clue {
     display: block;
 
-    width: 100%;
+    flex: 1;
+
+    width: auto;
 
     margin: 0;
 
@@ -1517,6 +1529,73 @@
 
 .crossword-clue strong {
     color: #d8b75f;
+}
+
+.crossword-clue.revealed {
+    color: #e8d9a8;
+}
+
+.clue-reveal-button {
+    flex-shrink: 0;
+
+    margin-top: 6px;
+
+    padding: 6px 8px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.35
+        );
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #d8b75f;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+.clue-reveal-button:hover:not(:disabled) {
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.1
+        );
+}
+
+.clue-reveal-button:disabled {
+    opacity: 0.55;
+
+    cursor: default;
+}
+
+.clue-reveal-answer {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #d8b75f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
 
 
@@ -2163,6 +2242,150 @@
 
 .password-form .solve-button {
     margin-top: 18px;
+}
+
+/* Progressive hints (gates + final lock) */
+
+.hint-panel {
+    margin-top: 22px;
+
+    text-align: center;
+}
+
+.lock-form .hint-panel {
+    margin-top: 8px;
+}
+
+.hint-button {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border:
+        1px solid
+        rgba(
+            216,
+            183,
+            95,
+            0.45
+        );
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #d8b75f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.hint-button:hover:not(:disabled) {
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.1
+        );
+}
+
+.hint-button:disabled {
+    opacity: 0.55;
+
+    cursor: default;
+}
+
+.hint-reveals {
+    margin-top: 14px;
+
+    text-align: left;
+}
+
+.hint-reveals[hidden] {
+    display: none;
+}
+
+.hint-item {
+    margin: 0 0 10px;
+
+    padding: 12px 14px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+    border-radius: 9px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+
+    color: #c4cec9;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.hint-item[hidden] {
+    display: none;
+}
+
+.hint-item-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #d8b75f;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.hint-solution {
+    border-color:
+        rgba(
+            216,
+            183,
+            95,
+            0.45
+        );
+
+    background:
+        rgba(
+            216,
+            183,
+            95,
+            0.1
+        );
+
+    color: #f1e6c4;
+}
+
+.hint-solution .hint-item-text {
+    font-weight: 700;
+
+    letter-spacing: 2px;
 }
 
 .riddle-content[hidden],

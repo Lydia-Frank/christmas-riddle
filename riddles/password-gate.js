@@ -133,6 +133,101 @@ function clearPasswordError(errorElement) {
 }
 
 
+const GATE_HINTS = {
+
+    2: {
+        hints: [
+            "Riddle one gave you 5 letters... You need 5 digits",
+            "Translate the letters from your word in riddle 1 into a 5 digit code using one of the decoders"
+        ],
+        getSolution: function () {
+            return (
+                getWordleUnlockCode() ||
+                "ADD CORRECT CODE HERE"
+            );
+        }
+    },
+
+    3: {
+        hints: [
+            "The solution to riddle 2 is more than just a random word",
+            "A decoder in the room translates colors into numbers"
+        ],
+        getSolution: function () {
+            return RIDDLE3_PASSWORD;
+        }
+    },
+
+    4: {
+        hints: [
+            "the route in the labyinth was not random",
+            "The way you walked in riddle 3 traces a three digit number, translate it to a 5 digit number using a decoder in the room"
+        ],
+        getSolution: function () {
+            return RIDDLE4_PASSWORD;
+        }
+    },
+
+    5: {
+        hints: [
+            "Which three objects did you see in the winter landscape?",
+            "A decoder in the room translates emojis into numbers. The order is shown by the arrow"
+        ],
+        getSolution: function () {
+            return RIDDLE5_PASSWORD;
+        }
+    }
+
+};
+
+
+function mountGateHints(gateElement, riddleNumber) {
+
+    if (
+        typeof createHintPanel !== "function"
+    ) {
+        return;
+    }
+
+    const config =
+        GATE_HINTS[riddleNumber];
+
+    if (!config) {
+        return;
+    }
+
+    const existing =
+        gateElement.querySelector(
+            ".hint-panel"
+        );
+
+    if (existing) {
+        return;
+    }
+
+    const panel = createHintPanel({
+        hints: config.hints,
+        getSolution: config.getSolution
+    });
+
+    if (!panel) {
+        return;
+    }
+
+    const formElement =
+        gateElement.querySelector(
+            ".password-form"
+        );
+
+    if (formElement) {
+        formElement.appendChild(panel);
+    } else {
+        gateElement.appendChild(panel);
+    }
+
+}
+
+
 function initPasswordGate() {
 
     const page = document.querySelector(
@@ -186,6 +281,11 @@ function initPasswordGate() {
         );
         return;
     }
+
+    mountGateHints(
+        gateElement,
+        riddleNumber
+    );
 
     formElement.addEventListener(
         "submit",

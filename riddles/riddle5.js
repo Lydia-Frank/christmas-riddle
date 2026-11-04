@@ -99,7 +99,43 @@ function restoreSolvedState() {
 }
 
 
+function mountLockHints() {
+
+    if (
+        typeof createHintPanel !== "function" ||
+        !lockForm ||
+        solved
+    ) {
+        return;
+    }
+
+    if (
+        lockForm.querySelector(".hint-panel")
+    ) {
+        return;
+    }
+
+    const panel = createHintPanel({
+        hints: [
+            "Use your math skills",
+            "Find a decoder that translates the writing in the stone into a math equation",
+            "8*(8+7)*18/2"
+        ],
+        getSolution: function () {
+            return LOCK_CODE;
+        }
+    });
+
+    if (panel) {
+        lockForm.appendChild(panel);
+    }
+
+}
+
+
 if (lockForm) {
+
+    mountLockHints();
 
     lockForm.addEventListener(
         "submit",
