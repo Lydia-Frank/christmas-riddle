@@ -176,11 +176,6 @@ const canvas =
 const context =
     canvas.getContext("2d");
 
-const moveCounter =
-    document.getElementById(
-        "moveCounter"
-    );
-
 const messageElement =
     document.getElementById(
         "mazeMessage"
@@ -429,8 +424,6 @@ function loadPlayerState() {
 
     }
 
-
-    updateMoveCounter();
 
 }
 
@@ -1041,8 +1034,6 @@ function movePlayer(
 
     savePlayerState();
 
-    updateMoveCounter();
-
     clearMessage();
 
     drawMaze();
@@ -1176,18 +1167,6 @@ function isInsideMaze(
         col >= 0 &&
         col < MAZE_COLS
     );
-
-}
-
-
-/* =================================
-   MOVE COUNTER
-================================= */
-
-function updateMoveCounter() {
-
-    moveCounter.textContent =
-        moves;
 
 }
 
