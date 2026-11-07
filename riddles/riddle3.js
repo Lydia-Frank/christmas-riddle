@@ -1092,7 +1092,7 @@ function completeMaze() {
         "hidden in the snow. This must be where they're " +
         "keeping Nisseline. But something is wrong... " +
         "We still don't know exactly how to get inside. " +
-        `(Reached in ${moves} moves.)`;
+        `(Take an extra look at the path you just walked.)`;
 
 
     resultElement.hidden =
